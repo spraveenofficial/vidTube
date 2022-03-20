@@ -1,7 +1,12 @@
+import VideoCard from "../../Components/VideoCard";
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
+    <div className="wrapper">
+      <VideoCard />
+      <VideoCard />
+      <VideoCard />
+      <VideoCard />
+      <VideoCard />
     </div>
   );
 };
