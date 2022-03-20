@@ -6,7 +6,6 @@ const VideoCard = () => {
   useEffect(() => {
     const card = document.querySelectorAll(".clip");
     card.forEach((eachCard) => {
-      console.log(eachCard);
       const mouseEnter$ = fromEvent(eachCard, "mouseenter");
       const mouseLeave$ = fromEvent(eachCard, "mouseleave");
       mouseEnter$.subscribe(() => {
