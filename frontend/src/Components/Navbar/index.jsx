@@ -5,6 +5,7 @@ import { useAuth } from "../../Contexts/auth-context";
 import { useRef } from "react";
 import { useDetectOutsideClick } from "../../Utils/useDetectOutsideClick";
 import baseurl from "../../Utils/baseurl";
+import { UploadIcon } from "../Icons";
 const Navbar = () => {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
@@ -32,7 +33,9 @@ const Navbar = () => {
                 className={`user-menu ${isActive ? "active" : "inactive"}`}
               >
                 <ul>
-                  <div>
+                  <div
+                    onClick={() => navigate("/channel") || setIsActive(false)}
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-5 w-5 mt-0.5"
@@ -46,6 +49,12 @@ const Navbar = () => {
                       />
                     </svg>
                     <span className="px-2">My Channel</span>
+                  </div>
+                  <div
+                    onClick={() => navigate("/upload") || setIsActive(false)}
+                  >
+                    <UploadIcon />
+                    <span className="px-2">Upload</span>
                   </div>
                   <div onClick={() => handleLogout()}>
                     <svg

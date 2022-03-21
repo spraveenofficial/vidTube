@@ -24,8 +24,18 @@ const Video = () => {
     );
 
   if (error) return <NotFound />;
-  const { title, views, description, url, image, userId, createdAt, _id } =
-    video.data;
+  const {
+    title,
+    views,
+    description,
+    likes,
+    dislikes,
+    url,
+    image,
+    userId,
+    createdAt,
+    _id,
+  } = video.data;
   const { channelName, subscribers, photoUrl } = userId;
   const handleLike = (videoId) => {
     likeVideo(dispatch, videoId);
@@ -44,9 +54,11 @@ const Video = () => {
                   {views} views - <span>{moment(createdAt).fromNow()}</span>
                 </p>
               </div>
-              <div className="video-titles-buttons gap10">
-                <LikeIcon onClick={() => handleLike(_id)} />
-                <DislikeIcon />
+              <div className="video-titles-buttons">
+                <LikeIcon isBlue={true} onClick={() => handleLike(_id)} />
+                {likes}
+                <DislikeIcon isBlue={false} />
+                {dislikes}
               </div>
             </div>
           </div>

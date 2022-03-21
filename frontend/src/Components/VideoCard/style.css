@@ -44,7 +44,7 @@
 }
 .clip .play-icon svg,
 .playlist .play-icon svg {
-  fill: var(--white-color)
+  fill: var(--white-color);
 }
 .clip.show-play-icon .play-icon,
 .playlist.show-play-icon .play-icon {
@@ -103,17 +103,17 @@
   position: relative;
 }
 .clip .content-container h3 {
-  display: -webkit-box;
-  margin: 0;
   font-size: 14px;
   font-weight: 500;
-  -webkit-box-orient: vertical;
-  text-overflow: ellipsis;
-  -webkit-line-clamp: 2;
+  height: 20px;
+  width: 200px;
   overflow: hidden;
-  margin-bottom: 8px;
-  color: var(--black-color);
-  text-transform: capitalize;
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color:var(--black-color);
 }
 .clip .content-container footer .channel-name {
   margin: 0;

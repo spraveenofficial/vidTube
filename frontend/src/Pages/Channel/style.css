@@ -1,0 +1,42 @@
+
+.channel__header {
+  height: 300px;
+}
+.channel__header__left__icon div {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border-style: solid;
+  border-color: var(--white-color);
+  box-shadow: 0 0 8px 2px #b8b8b8;
+  position: relative;
+}
+
+.channel__header__left__icon div img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
+
+.channel__header__left__icon div i {
+  position: absolute;
+  top: 20px;
+  right: -7px;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--white-color);
+  cursor: pointer;
+  color: cornflowerblue;
+  box-shadow: 0 0 8px 3px #b8b8b8;
+}
+
+.channel-info-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+}

@@ -8,6 +8,9 @@ import {
   LIKE_VIDEO,
   LIKE_VIDEO_SUCCESS,
   LIKE_VIDEO_FAILURE,
+  UPLOAD_VIDEO,
+  UPLOAD_VIDEO_SUCCESS,
+  UPLOAD_VIDEO_FAILURE,
 } from "../Constants/video";
 import axios from "axios";
 import baseUrl from "../Utils/baseurl";
@@ -56,5 +59,23 @@ export const likeVideo = async (dispatch, videoId) => {
   } catch (error) {
     console.log(error);
     dispatch({ type: LIKE_VIDEO_FAILURE, payload: error });
+  }
+};
+
+export const uploadVideo = async (dispatch, formData) => {
+  try {
+    dispatch({ type: UPLOAD_VIDEO });
+    const { data } = await axios({
+      url: `${baseUrl}/video/upload`,
+      method: "POST",
+      data: formData,
+      headers: {
+        token: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    dispatch({ type: UPLOAD_VIDEO_SUCCESS });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: UPLOAD_VIDEO_FAILURE });
   }
 };

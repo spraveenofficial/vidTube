@@ -10,6 +10,8 @@ import { useAuth } from "./Contexts/auth-context";
 import { loadUser } from "./Actions";
 import Video from "./Pages/Video";
 import Loader from "./Components/Loader";
+import Upload from "./Pages/Upload";
+import Channel from "./Pages/Channel";
 function App() {
   const { isAuthenticated, loading, dispatch } = useAuth();
   const token = localStorage.getItem("token");
@@ -28,6 +30,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/video/:id" element={<Video />} />
+            <Route element={<ProtectedRoutes />}>
+              <Route path="/upload" element={<Upload />} />
+              <Route path="/channel" element={<Channel />} />
+            </Route>
             <Route element={<GuestRoutes />}>
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
