@@ -8,6 +8,9 @@ import {
   UPLOAD_VIDEO,
   UPLOAD_VIDEO_SUCCESS,
   UPLOAD_VIDEO_FAILURE,
+  FETCH_VIDEO_LIKE,
+  FETCH_VIDEO_LIKE_SUCCESS,
+  FETCH_VIDEO_LIKE_FAILURE,
 } from "../Constants/video";
 
 export const getHomeVideos = (state, action) => {
@@ -85,5 +88,26 @@ export const uploadVideoReducer = (state, action) => {
       };
     default:
       return state;
+  }
+};
+
+export const getVideoLike = (state, action) => {
+  console.log(action);
+  switch (action.type) {
+    case FETCH_VIDEO_LIKE:
+      return {
+        ...state,
+      };
+    case FETCH_VIDEO_LIKE_SUCCESS:
+      return {
+        ...state,
+        liked: action.isLiked,
+        disLiked: action.isDisliked,
+      };
+    case FETCH_VIDEO_LIKE_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+      };
   }
 };

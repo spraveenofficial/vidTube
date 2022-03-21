@@ -33,6 +33,9 @@
   gap: 10px;
   font-size: 20px;
 }
+.video-titles-buttons svg{
+  cursor: pointer;
+}
 .video-channel-info {
   justify-content: space-between;
   align-items: center;
