@@ -5,4 +5,5 @@ export {
   loadEachVideo,
   likeVideo,
   uploadVideo,
+  fetchVideoLike,
 } from "./videos";

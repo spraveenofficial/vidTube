@@ -11,6 +11,9 @@ import {
   UPLOAD_VIDEO,
   UPLOAD_VIDEO_SUCCESS,
   UPLOAD_VIDEO_FAILURE,
+  FETCH_VIDEO_LIKE,
+  FETCH_VIDEO_LIKE_SUCCESS,
+  FETCH_VIDEO_LIKE_FAILURE,
 } from "../Constants/video";
 import axios from "axios";
 import baseUrl from "../Utils/baseurl";
@@ -41,27 +44,6 @@ export const loadEachVideo = async (dispatch, videoId) => {
   }
 };
 
-export const likeVideo = async (dispatch, videoId) => {
-  try {
-    dispatch({ type: LIKE_VIDEO });
-    const { data } = await axios({
-      url: `${baseUrl}/feelings/like`,
-      method: "POST",
-      data: {
-        videoId,
-        type: "like",
-      },
-      headers: {
-        token: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-    dispatch({ type: LIKE_VIDEO_SUCCESS, payload: data });
-  } catch (error) {
-    console.log(error);
-    dispatch({ type: LIKE_VIDEO_FAILURE, payload: error });
-  }
-};
-
 export const uploadVideo = async (dispatch, formData) => {
   try {
     dispatch({ type: UPLOAD_VIDEO });
@@ -77,5 +59,52 @@ export const uploadVideo = async (dispatch, formData) => {
   } catch (error) {
     console.log(error);
     dispatch({ type: UPLOAD_VIDEO_FAILURE });
+  }
+};
+
+export const fetchVideoLike = async (dispatch, videoId) => {
+  try {
+    dispatch({ type: FETCH_VIDEO_LIKE });
+    const { data } = await axios({
+      url: `${baseUrl}/feelings/check`,
+      method: "POST",
+      data: { videoId },
+      headers: {
+        token: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    dispatch({
+      type: FETCH_VIDEO_LIKE_SUCCESS,
+      isLiked: data.data.liked,
+      isDisliked: data.data.disliked,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: FETCH_VIDEO_LIKE_FAILURE, payload: error });
+  }
+};
+
+export const likeVideo = async (dispatch, videoId, type) => {
+  try {
+    dispatch({ type: FETCH_VIDEO_LIKE });
+    const { data } = await axios({
+      url: `${baseUrl}/feelings/like`,
+      method: "POST",
+      data: {
+        videoId,
+        type,
+      },
+      headers: {
+        token: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    dispatch({
+      type: FETCH_VIDEO_LIKE_SUCCESS,
+      isLiked: data.data.liked,
+      isDisliked: data.data.disliked,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: FETCH_VIDEO_LIKE_FAILURE, payload: error });
   }
 };

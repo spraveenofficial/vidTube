@@ -1,5 +1,17 @@
-import { getHomeVideos, getEachVideo, uploadVideoReducer } from "../Reducers";
-import { loadEachVideo, loadHomeVideos, uploadVideo } from "../Actions";
+import {
+  getHomeVideos,
+  getEachVideo,
+  uploadVideoReducer,
+  getVideoLike,
+} from "../Reducers";
+import {
+  fetchVideoLike,
+  likeVideo,
+  loadEachVideo,
+  loadHomeVideos,
+  uploadVideo,
+} from "../Actions";
+import { useAuth } from "../Contexts/auth-context";
 import { useReducer, useEffect } from "react";
 export const useHomePageVideos = () => {
   const initialState = {
@@ -34,11 +46,38 @@ export const useVideoUpload = () => {
     loading: false,
     error: null,
     success: false,
-    message: ''
+    message: "",
   };
   const [state, dispatch] = useReducer(uploadVideoReducer, initialState);
   const uploadFunction = (video) => {
     uploadVideo(dispatch, video);
   };
   return { state, upload: uploadFunction };
+};
+
+export const useVideoLike = (videoId) => {
+  const { isAuthenticated } = useAuth();
+  const initialState = {
+    liked: false,
+    disLiked: false,
+  };
+  const [states, dispatch] = useReducer(getVideoLike, initialState);
+  useEffect(() => {
+    isAuthenticated && fetchVideoLike(dispatch, videoId);
+  }, []);
+  const handleLike = (id) => {
+    likeVideo(dispatch, id, "like");
+  };
+  const handleDisLike = (id) => {
+    likeVideo(dispatch, id, "dislike");
+  };
+  return { states, handleLike, handleDisLike };
+};
+
+export const useLikeAndDislike = () => {
+  const initialState = {
+    liked: false,
+    disLiked: false,
+  };
+  const [state, dispatch] = useReducer(getVideoLike, initialState);
 };

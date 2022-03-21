@@ -2,16 +2,21 @@ import "./style.css";
 import { LikeIcon, DislikeIcon } from "../../Components/Icons";
 import Button from "../../Components/Button";
 import Player from "../../Components/Player";
-import { useEachVideo } from "../../Hooks/videos";
+import {
+  useEachVideo,
+  useLikeAndDislike,
+  useVideoLike,
+} from "../../Hooks/videos";
 import { useParams } from "react-router-dom";
 import Skeleton from "../../Components/Skeleton";
 import moment from "moment";
 import baseUrl from "../../Utils/baseurl";
-import { likeVideo } from "../../Actions";
 import NotFound from "../../Components/NotFound";
 const Video = () => {
   const { id } = useParams();
-  const { state, dispatch } = useEachVideo(id);
+  const { states, handleLike, handleDisLike } = useVideoLike(id);
+  const { liked, disLiked } = states;
+  const { state } = useEachVideo(id);
   const { loading, video, success, error } = state;
 
   if (loading)
@@ -37,8 +42,11 @@ const Video = () => {
     _id,
   } = video.data;
   const { channelName, subscribers, photoUrl } = userId;
-  const handleLike = (videoId) => {
-    likeVideo(dispatch, videoId);
+  const handleLikes = (videoId) => {
+    handleLike(videoId);
+  };
+  const handleDisLikes = (videoId) => {
+    handleDisLike(videoId);
   };
   return (
     !loading &&
@@ -55,10 +63,13 @@ const Video = () => {
                 </p>
               </div>
               <div className="video-titles-buttons">
-                <LikeIcon isBlue={true} onClick={() => handleLike(_id)} />
-                {likes}
-                <DislikeIcon isBlue={false} />
-                {dislikes}
+                <LikeIcon isblue={liked} onClick={() => handleLikes(_id)} />
+                {liked ? likes + 1 : likes}
+                <DislikeIcon
+                  isblue={disLiked}
+                  onClick={() => handleDisLikes(_id)}
+                />
+                {disLiked ? dislikes + 1 : dislikes}
               </div>
             </div>
           </div>

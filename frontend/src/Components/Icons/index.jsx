@@ -201,13 +201,13 @@ export const SignoutIcon = (props) => (
   </svg>
 );
 
-export const LikeIcon = (props, { isBlue }) => (
+export const LikeIcon = (props) => (
   <svg
     {...props}
     viewBox="0 0 24 24"
     preserveAspectRatio="xMidYMid meet"
     focusable="false"
-    fill={isBlue ? "rgb(32, 120, 244)" : "#AAAAAA"}
+    fill={props.isblue ? "rgb(32, 120, 244)" : "#AAAAAA"}
     width="30"
     height="30"
   >
@@ -217,12 +217,13 @@ export const LikeIcon = (props, { isBlue }) => (
   </svg>
 );
 
-export const DislikeIcon = ({ isBlue }) => (
+export const DislikeIcon = (props) => (
   <svg
+    {...props}
     viewBox="0 0 24 24"
     preserveAspectRatio="xMidYMid meet"
     focusable="false"
-    fill={isBlue ? "rgb(32, 120, 244)" : "#AAAAAA"}
+    fill={props.isblue ? "rgb(32, 120, 244)" : "#AAAAAA"}
     width="30"
     height="30"
   >
