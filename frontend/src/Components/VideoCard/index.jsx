@@ -1,40 +1,26 @@
-import { useEffect } from "react";
 import "./style.css";
-import { fromEvent, of } from "rxjs";
-import { delay, takeUntil, flatMap } from "rxjs/operators";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import baseUrl from "../../Utils/baseurl";
 const VideoCard = ({ data }) => {
   const navigate = useNavigate();
-  const { id, title, description, url, image, views, userId, createdAt } = data;
-  useEffect(() => {
-    const card = document.querySelectorAll(".clip");
-    card.forEach((eachCard) => {
-      const mouseEnter$ = fromEvent(eachCard, "mouseenter");
-      const mouseLeave$ = fromEvent(eachCard, "mouseleave");
-      mouseEnter$.subscribe(() => {
-        eachCard.classList.add("hoverable");
-      });
-      mouseEnter$
-        .pipe(flatMap((e) => of(e).pipe(delay(2500), takeUntil(mouseLeave$))))
-        .subscribe(() => {
-          eachCard.classList.remove("hoverable");
-          eachCard.classList.add("show-play-icon");
-        });
+  const {
+    id,
+    title,
+    url,
+    thumbnailUrl,
+    views,
+    userId,
+    createdAt,
+  } = data;
 
-      mouseLeave$.subscribe(() => {
-        eachCard.classList.remove("hoverable");
-        eachCard.classList.remove("show-play-icon");
-      });
-    });
-  });
   const handleNavigate = (path) => {
     handleNavigate("/video/" + path);
   };
   return (
     <div onClick={() => navigate(`/video/${id}`)} className="clip">
       <section className="preview-container">
-        <img src="https://res.cloudinary.com/dtswa0rzu/video/upload/v1647790440/lolipop%20Lagelu.webp" />
+        <img src={`${baseUrl}/${thumbnailUrl}`} />
         <span className="time-status">5:15</span>
         <div className="overlay-preview">
           <div className="play-icon">
@@ -45,7 +31,7 @@ const VideoCard = ({ data }) => {
             </svg>
           </div>
           <div className="preview">
-            <img src="https://im2.ezgif.com/tmp/ezgif-2-22d8315081.webp" />
+            <img src={`${baseUrl}/${url}`} />
           </div>
           <button className="watch-later-button">
             <svg viewBox="0 0 24 24">

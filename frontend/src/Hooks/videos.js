@@ -1,5 +1,5 @@
-import { getHomeVideos, getEachVideo } from "../Reducers";
-import { loadEachVideo, loadHomeVideos } from "../Actions";
+import { getHomeVideos, getEachVideo, uploadVideoReducer } from "../Reducers";
+import { loadEachVideo, loadHomeVideos, uploadVideo } from "../Actions";
 import { useReducer, useEffect } from "react";
 export const useHomePageVideos = () => {
   const initialState = {
@@ -27,4 +27,18 @@ export const useEachVideo = (videoId) => {
     loadEachVideo(dispatch, videoId);
   }, []);
   return { state, dispatch };
+};
+
+export const useVideoUpload = () => {
+  const initialState = {
+    loading: false,
+    error: null,
+    success: false,
+    message: ''
+  };
+  const [state, dispatch] = useReducer(uploadVideoReducer, initialState);
+  const uploadFunction = (video) => {
+    uploadVideo(dispatch, video);
+  };
+  return { state, upload: uploadFunction };
 };

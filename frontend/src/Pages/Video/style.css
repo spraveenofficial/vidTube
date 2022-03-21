@@ -29,7 +29,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 20px;
+  text-align: center;
+  gap: 10px;
+  font-size: 20px;
 }
 .video-channel-info {
   justify-content: space-between;

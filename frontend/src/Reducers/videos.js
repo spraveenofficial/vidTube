@@ -5,6 +5,9 @@ import {
   LOAD_EACH_VIDEO,
   LOAD_EACH_VIDEO_SUCCESS,
   LOAD_EACH_VIDEO_FAILURE,
+  UPLOAD_VIDEO,
+  UPLOAD_VIDEO_SUCCESS,
+  UPLOAD_VIDEO_FAILURE,
 } from "../Constants/video";
 
 export const getHomeVideos = (state, action) => {
@@ -52,6 +55,32 @@ export const getEachVideo = (state, action) => {
         ...state,
         loading: false,
         error: action.payload,
+        success: false,
+      };
+    default:
+      return state;
+  }
+};
+
+export const uploadVideoReducer = (state, action) => {
+  switch (action.type) {
+    case UPLOAD_VIDEO:
+      return {
+        ...state,
+        loading: true,
+      };
+    case UPLOAD_VIDEO_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        message: "Video uploaded successfully",
+      };
+    case UPLOAD_VIDEO_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        message: "Video upload failed",
         success: false,
       };
     default:
