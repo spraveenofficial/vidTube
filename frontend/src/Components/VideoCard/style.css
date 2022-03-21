@@ -113,6 +113,7 @@
   overflow: hidden;
   margin-bottom: 8px;
   color: var(--black-color);
+  text-transform: capitalize;
 }
 .clip .content-container footer .channel-name {
   margin: 0;
