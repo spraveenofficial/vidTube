@@ -1,0 +1,17 @@
+nav {
+  background-color: #f8f9fa;
+  padding: 0.7rem 3.5rem;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+nav #navbar-btn {
+  padding: 0.8rem;
+}
+@media (max-width: 767px) {
+  nav {
+    padding: 0.8rem 1rem;
+  }
+}

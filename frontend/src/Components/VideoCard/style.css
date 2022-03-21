@@ -1,0 +1,145 @@
+.wrapper {
+  margin-top: 1rem;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 220px);
+  grid-row-gap: 1.4rem;
+  grid-column-gap: 0.625rem;
+  justify-content: center;
+  font-family: inherit;
+}
+.clip {
+  cursor: pointer;
+  text-decoration: none;
+}
+.clip section.preview-container,
+.playlist section.preview-container {
+  width: 100%;
+  height: 117px;
+  position: relative;
+}
+.clip section.preview-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.clip .overlay-preview {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+.clip .play-icon {
+  width: 13.688rem;
+  height: 13.688rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.clip .play-icon svg,
+.playlist .play-icon svg {
+  fill: var(--white-color)
+}
+.clip.show-play-icon .play-icon,
+.playlist.show-play-icon .play-icon {
+  opacity: 0.8;
+}
+.clip:hover .watch-later-button,
+.playlist:hover .watch-later-button,
+.clip:hover .more-button {
+  opacity: 1;
+}
+.clip.hoverable .preview {
+  opacity: 1;
+}
+.clip .preview {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+.clip .time-status {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 4px;
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: 0.725rem;
+  display: inline-block;
+  padding: 1px 4px;
+  border-radius: 2px;
+}
+.clip .watch-later-button {
+  transition: opacity 0.5s;
+  border-radius: 2px;
+  opacity: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  background-color: var(--black-color);
+  border: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 4px;
+  padding: 2px;
+}
+.clip .watch-later-button svg {
+  fill: var(--white-color);
+}
+.clip .content-container {
+  padding-top: 0.625rem;
+  padding-right: 1.5rem;
+  position: relative;
+}
+.clip .content-container h3 {
+  display: -webkit-box;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 500;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-bottom: 8px;
+  color: var(--black-color);
+}
+.clip .content-container footer .channel-name {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #606060;
+  display: block;
+  width: 100%;
+}
+.clip .content-container footer .channel-name:hover {
+  color: rgba(18, 18, 18, 0.8);
+}
+.clip .content-container footer .meta p {
+  font-size: 0.75rem;
+  display: inline-block;
+  margin: 0;
+  color: #606060;
+}
+.clip .content-container footer .meta p:first-child:after {
+  display: inline-block;
+  content: "•";
+  margin: 0 4px;
+  font-weight: bold;
+}
+
+@media (max-width: 767px) {
+  .wrapper {
+    padding: 0.625rem;
+    grid-template-columns: repeat(auto-fill, 45%);
+  }
+}
