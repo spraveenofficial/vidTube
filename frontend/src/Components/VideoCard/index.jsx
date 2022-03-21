@@ -2,7 +2,11 @@ import { useEffect } from "react";
 import "./style.css";
 import { fromEvent, of } from "rxjs";
 import { delay, takeUntil, flatMap } from "rxjs/operators";
-const VideoCard = () => {
+import moment from "moment";
+import { useNavigate } from "react-router-dom";
+const VideoCard = ({ data }) => {
+  const navigate = useNavigate();
+  const { id, title, description, url, image, views, userId, createdAt } = data;
   useEffect(() => {
     const card = document.querySelectorAll(".clip");
     card.forEach((eachCard) => {
@@ -24,8 +28,11 @@ const VideoCard = () => {
       });
     });
   });
+  const handleNavigate = (path) => {
+    handleNavigate("/video/" + path);
+  };
   return (
-    <div className="clip">
+    <div onClick={() => navigate(`/video/${id}`)} className="clip">
       <section className="preview-container">
         <img src="https://res.cloudinary.com/dtswa0rzu/video/upload/v1647790440/lolipop%20Lagelu.webp" />
         <span className="time-status">5:15</span>
@@ -53,12 +60,12 @@ const VideoCard = () => {
         </div>
       </section>
       <section className="content-container">
-        <h3>RAP AGAINST DICTATORSHIP</h3>
+        <h3>{title}</h3>
         <footer>
-          <p className="channel-name">Praveen Kumar Singh</p>
+          <p className="channel-name">{userId.channelName}</p>
           <div className="meta">
-            <p>2M views</p>
-            <p>6 months ago</p>
+            <p>{views} views</p>
+            <p>{moment(createdAt).fromNow()}</p>
           </div>
         </footer>
       </section>

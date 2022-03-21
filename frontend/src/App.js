@@ -8,6 +8,7 @@ import Navbar from "./Components/Navbar";
 import { useEffect } from "react";
 import { useAuth } from "./Contexts/auth-context";
 import { loadUser } from "./Actions";
+import Video from "./Pages/Video";
 import Loader from "./Components/Loader";
 function App() {
   const { isAuthenticated, loading, dispatch } = useAuth();
@@ -26,6 +27,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/video/:id" element={<Video />} />
             <Route element={<GuestRoutes />}>
               <Route path="/signup" element={<Signup />} />
               <Route path="/login" element={<Login />} />
