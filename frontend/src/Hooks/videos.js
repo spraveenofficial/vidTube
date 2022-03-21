@@ -74,10 +74,3 @@ export const useVideoLike = (videoId) => {
   return { states, handleLike, handleDisLike };
 };
 
-export const useLikeAndDislike = () => {
-  const initialState = {
-    liked: false,
-    disLiked: false,
-  };
-  const [state, dispatch] = useReducer(getVideoLike, initialState);
-};
