@@ -1,0 +1,39 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: 90%;
+  
+  width: 250px;
+  overflow-y: auto;
+  overflow-x: none;
+  background: #f8f9fa;
+  padding: 1rem 0rem 1rem 1rem;
+  justify-content: space-between;
+  z-index: 1;
+  float: left;
+  position: fixed;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  flex-shrink: inherit;
+}
+
+.menu-item {
+  font-size: 1.3rem;
+  margin: 1rem 0rem 1rem 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  height: 2.4rem;
+  align-items: center;
+  display: flex;
+  margin-left: 20px;
+}
+.menu-item span {
+  margin-left: 5px;
+}
+
+
+@media (max-width: 767px) {
+  .sidebar {
+    display: none;
+  }
+}

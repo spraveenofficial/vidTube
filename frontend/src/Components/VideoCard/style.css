@@ -1,11 +1,10 @@
 .wrapper {
-  margin-top: 1rem;
-  padding: 2rem;
+  padding: 1rem;
   display: grid;
   grid-template-columns: repeat(auto-fill, 220px);
   grid-row-gap: 1.4rem;
   grid-column-gap: 0.625rem;
-  justify-content: center;
+  justify-content: start;
   font-family: inherit;
 }
 .clip {
@@ -113,7 +112,7 @@
   text-decoration: none;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color:var(--black-color);
+  color: var(--black-color);
 }
 .clip .content-container footer .channel-name {
   margin: 0;

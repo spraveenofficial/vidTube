@@ -4,6 +4,7 @@
   position: relative;
   overflow: hidden;
   padding: 40px;
+  margin-left: 250px;
 }
 .video__container {
   width: 60%;
@@ -57,6 +58,7 @@
 @media (max-width: 900px) {
   .video {
     padding: 20px;
+    margin-left: 0px;
   }
   .video__container {
     width: 100%;
