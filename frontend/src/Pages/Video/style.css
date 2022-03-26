@@ -58,7 +58,7 @@
 @media (max-width: 900px) {
   .video {
     padding: 20px;
-    margin-left: 0px;
+    margin-left: 0;
   }
   .video__container {
     width: 100%;

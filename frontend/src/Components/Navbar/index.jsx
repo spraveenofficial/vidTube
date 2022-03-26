@@ -30,7 +30,7 @@ const Navbar = () => {
               </button>
               <div
                 ref={dropdownRef}
-                className={`user-menu ${isActive ? "active" : "inactive"}`}
+                className={`user-menu ${isActive ? "actives" : "inactive"}`}
               >
                 <ul>
                   <div
