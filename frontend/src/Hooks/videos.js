@@ -13,6 +13,7 @@ import {
 } from "../Actions";
 import { useAuth } from "../Contexts/auth-context";
 import { useReducer, useEffect } from "react";
+
 export const useHomePageVideos = () => {
   const initialState = {
     videos: [],
@@ -65,11 +66,19 @@ export const useVideoLike = (videoId) => {
   useEffect(() => {
     isAuthenticated && fetchVideoLike(dispatch, videoId);
   }, []);
-  const handleLike = (id) => {
-    return likeVideo(dispatch, id, "like");
+  const handleLike = async (setDispatch) => {
+    const status = await likeVideo(dispatch, videoId, "like");
+    status == true
+      ? setDispatch({ type: "INCREASELIKE" })
+      : setDispatch({ type: "DECREASELIKE" });
   };
-  const handleDisLike = (id) => {
-    return likeVideo(dispatch, id, "dislike");
+  const handleDisLike = async (setDispatch) => {
+    const status = await likeVideo(dispatch, videoId, "dislike");
+    if (status) {
+      setDispatch({ type: "INCREASEDISLIKE" });
+    } else {
+      setDispatch({ type: "DECREASEDISLIKE" });
+    }
   };
-  return { states, handleLike, handleDisLike };
+  return { states, handleLike, handleDisLike, isAuthenticated };
 };

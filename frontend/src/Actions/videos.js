@@ -103,7 +103,7 @@ export const likeVideo = async (dispatch, videoId, type) => {
       isLiked: data.data.liked,
       isDisliked: data.data.disliked,
     });
-    return data.data.liked ? true : false;
+    return data.data.liked ? true : data.data.disliked ? true : false;
   } catch (error) {
     dispatch({ type: FETCH_VIDEO_LIKE_FAILURE, payload: error });
   }

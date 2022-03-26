@@ -8,13 +8,16 @@ import Skeleton from "../../Components/Skeleton";
 import moment from "moment";
 import baseUrl from "../../Utils/baseurl";
 import NotFound from "../../Components/NotFound";
+import Toast from "../../Components/Toast";
+import { useState } from "react";
 const Video = () => {
+  const [toast, setToast] = useState(false);
   const { id } = useParams();
-  const { states, handleLike, handleDisLike } = useVideoLike(id);
+  const { states, handleLike, handleDisLike, isAuthenticated } =
+    useVideoLike(id);
   const { liked, disLiked } = states;
   const { state, dispatch } = useEachVideo(id);
   const { loading, video, success, error } = state;
-  console.log(state.video);
   if (loading)
     return (
       <div className="wrapper">
@@ -25,28 +28,14 @@ const Video = () => {
     );
 
   if (error) return <NotFound />;
-  const {
-    title,
-    views,
-    likes,
-    dislikes,
-    url,
-    image,
-    userId,
-    createdAt,
-    _id,
-  } = video.data;
+  const { title, views, likes, dislikes, url, image, userId, createdAt, _id } =
+    video.data;
   const { channelName, subscribers, photoUrl } = userId;
-  const handleLikes = async (videoId) => {
-    const status = await handleLike(videoId);
-    if (status) {
-      dispatch({ type: "INCREASELIKE" });
-    } else {
-      dispatch({ type: "DECREASELIKE" });
-    }
+  const handleLikes = () => {
+    !isAuthenticated ? setToast((prev) => !prev) : handleLike(dispatch);
   };
-  const handleDisLikes = (videoId) => {
-    handleDisLike(videoId);
+  const handleDisLikes = async () => {
+    !isAuthenticated ? setToast((prev) => !prev) : handleDisLike(dispatch);
   };
   return (
     !loading &&
@@ -99,6 +88,7 @@ const Video = () => {
             </div>
           </div>
         </div>
+        {toast && <Toast message="You are not authenticated." />}
       </div>
     )
   );

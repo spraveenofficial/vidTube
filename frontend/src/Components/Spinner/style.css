@@ -40,12 +40,3 @@
   }
 }
 
-.loading-btn {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-}
-
-.loading-btn div {
-  margin-right: 5px;
-}
