@@ -60,6 +60,8 @@ export const getEachVideo = (state, action) => {
         error: action.payload,
         success: false,
       };
+    // case VIDEO_LIKE: 
+    // return {...state, }
     default:
       return state;
   }

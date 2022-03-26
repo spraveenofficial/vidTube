@@ -5,21 +5,13 @@ import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
 import Navbar from "./Components/Navbar";
-import { useEffect } from "react";
 import { useAuth } from "./Contexts/auth-context";
-import { loadUser } from "./Actions";
 import Video from "./Pages/Video";
 import Loader from "./Components/Loader";
 import Upload from "./Pages/Upload";
 import Channel from "./Pages/Channel";
 function App() {
-  const { isAuthenticated, loading, dispatch } = useAuth();
-  const token = localStorage.getItem("token");
-  useEffect(() => {
-    if (token && !isAuthenticated) {
-      loadUser(dispatch);
-    }
-  }, [token, dispatch]);
+  const { loading } = useAuth();
   return (
     <Router>
       {loading ? (

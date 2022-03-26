@@ -2,11 +2,7 @@ import "./style.css";
 import { LikeIcon, DislikeIcon } from "../../Components/Icons";
 import Button from "../../Components/Button";
 import Player from "../../Components/Player";
-import {
-  useEachVideo,
-  useLikeAndDislike,
-  useVideoLike,
-} from "../../Hooks/videos";
+import { useEachVideo, useVideoLike } from "../../Hooks/videos";
 import { useParams } from "react-router-dom";
 import Skeleton from "../../Components/Skeleton";
 import moment from "moment";
@@ -64,12 +60,12 @@ const Video = () => {
               </div>
               <div className="video-titles-buttons">
                 <LikeIcon isblue={liked} onClick={() => handleLikes(_id)} />
-                {liked ? likes + 1 : likes}
+                {likes}
                 <DislikeIcon
                   isblue={disLiked}
                   onClick={() => handleDisLikes(_id)}
                 />
-                {disLiked ? dislikes + 1 : dislikes}
+                {dislikes}
               </div>
             </div>
           </div>
