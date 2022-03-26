@@ -40,6 +40,7 @@ export const getHomeVideos = (state, action) => {
 };
 
 export const getEachVideo = (state, action) => {
+  console.log(action.type);
   switch (action.type) {
     case LOAD_EACH_VIDEO:
       return {
@@ -60,8 +61,16 @@ export const getEachVideo = (state, action) => {
         error: action.payload,
         success: false,
       };
-    // case VIDEO_LIKE: 
-    // return {...state, }
+    case "INCREASELIKE":
+      return {
+        ...state,
+        ...(state.video.data.likes = state.video.data.likes + 1),
+      };
+    case "DECREASELIKE":
+      return {
+        ...state,
+        ...(state.video.data.likes = state.video.data.likes - 1),
+      };
     default:
       return state;
   }
@@ -94,7 +103,6 @@ export const uploadVideoReducer = (state, action) => {
 };
 
 export const getVideoLike = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case FETCH_VIDEO_LIKE:
       return {

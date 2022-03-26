@@ -12,9 +12,9 @@ const Video = () => {
   const { id } = useParams();
   const { states, handleLike, handleDisLike } = useVideoLike(id);
   const { liked, disLiked } = states;
-  const { state } = useEachVideo(id);
+  const { state, dispatch } = useEachVideo(id);
   const { loading, video, success, error } = state;
-
+  console.log(state.video);
   if (loading)
     return (
       <div className="wrapper">
@@ -28,7 +28,6 @@ const Video = () => {
   const {
     title,
     views,
-    description,
     likes,
     dislikes,
     url,
@@ -38,8 +37,13 @@ const Video = () => {
     _id,
   } = video.data;
   const { channelName, subscribers, photoUrl } = userId;
-  const handleLikes = (videoId) => {
-    handleLike(videoId);
+  const handleLikes = async (videoId) => {
+    const status = await handleLike(videoId);
+    if (status) {
+      dispatch({ type: "INCREASELIKE" });
+    } else {
+      dispatch({ type: "DECREASELIKE" });
+    }
   };
   const handleDisLikes = (videoId) => {
     handleDisLike(videoId);
@@ -59,10 +63,13 @@ const Video = () => {
                 </p>
               </div>
               <div className="video-titles-buttons">
-                <LikeIcon isblue={liked} onClick={() => handleLikes(_id)} />
+                <LikeIcon
+                  isblue={liked ? liked : null}
+                  onClick={() => handleLikes(_id)}
+                />
                 {likes}
                 <DislikeIcon
-                  isblue={disLiked}
+                  isblue={disLiked ? disLiked : null}
                   onClick={() => handleDisLikes(_id)}
                 />
                 {dislikes}

@@ -66,11 +66,10 @@ export const useVideoLike = (videoId) => {
     isAuthenticated && fetchVideoLike(dispatch, videoId);
   }, []);
   const handleLike = (id) => {
-    likeVideo(dispatch, id, "like");
+    return likeVideo(dispatch, id, "like");
   };
   const handleDisLike = (id) => {
-    likeVideo(dispatch, id, "dislike");
+    return likeVideo(dispatch, id, "dislike");
   };
   return { states, handleLike, handleDisLike };
 };
-
