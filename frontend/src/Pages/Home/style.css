@@ -1,0 +1,23 @@
+.homepage {
+  display: flex;
+  min-height: 100vh;
+}
+.homepage-items {
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  width: 100%;
+  float: right;
+  margin-left: 250px;
+  /* min-height: 100vh; */
+}
+
+.skeleton-loader {
+  display: flex;
+}
+
+@media (max-width: 767px) {
+  .homepage-items {
+    margin-left: 0;
+  }
+}

@@ -1,4 +1,4 @@
-nav {
+.navbar {
   background-color: #f8f9fa;
   padding: 0.7rem 3.5rem;
   border-bottom: 1px solid #dee2e6;
@@ -6,6 +6,17 @@ nav {
   justify-content: space-between;
   align-items: center;
   text-align: center;
+  position: fixed;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  -webkit-transition: top 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  transition: top 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  z-index: 1100;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  box-shadow: inset 0px -1px 1px #e7ebf0;
+  background-color: rgba(255, 255, 255, 0.72);
 }
 .user-menu-container {
   z-index: 1000;
@@ -61,7 +72,7 @@ nav {
   transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
 }
 
-.user-menu.active {
+.user-menu.actives {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -85,8 +96,69 @@ nav {
   margin-right: 10px;
 }
 
+.navbar {
+  background: var(--white-color);
+  height: 4rem;
+  width: 100%;
+}
+
+.navbar-container {
+  margin: 0 3rem;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  align-items: center;
+  text-align: center;
+}
+
+/* Align navbar logo center */
+
+.navbar-container .navbar-center-items,
+.navbar-container .navbar-items {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.mobile-menu .navbar-logo img {
+  width: 3rem;
+  height: 3rem;
+}
+.mobile-menu {
+  width: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+}
+.mobile-nav-container {
+  position: fixed;
+  z-index: 1;
+  right: 5rem;
+  width: 100vw;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  background: #f8f9fa;
+  height: 100vh;
+}
+.mobile-nav-items {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.mobile-nav-items p {
+  cursor: pointer;
+  font-size: 1.8rem;
+}
+
 @media (max-width: 767px) {
-  nav {
+  .navbar-container {
+    margin: 0 1rem;
+  }
+  .navbar {
     padding: 0.8rem 1rem;
   }
 }
