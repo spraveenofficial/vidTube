@@ -3,8 +3,10 @@ import {
   getEachVideo,
   uploadVideoReducer,
   getVideoLike,
+  getLikedVideos,
 } from "../Reducers";
 import {
+  fetchLikedVideos,
   fetchVideoLike,
   likeVideo,
   loadEachVideo,
@@ -81,4 +83,18 @@ export const useVideoLike = (videoId) => {
     }
   };
   return { states, handleLike, handleDisLike, isAuthenticated };
+};
+
+export const useLikedVideos = () => {
+  const initialState = {
+    videos: [],
+    loading: true,
+    error: null,
+    success: false,
+  };
+  const [state, dispatch] = useReducer(getLikedVideos, initialState);
+  useEffect(() => {
+    fetchLikedVideos(dispatch);
+  }, []);
+  return { state };
 };

@@ -4,15 +4,7 @@ import { useNavigate } from "react-router-dom";
 import baseUrl from "../../Utils/baseurl";
 const VideoCard = ({ data }) => {
   const navigate = useNavigate();
-  const {
-    id,
-    title,
-    url,
-    thumbnailUrl,
-    views,
-    userId,
-    createdAt,
-  } = data;
+  const { id, title, url, thumbnailUrl, views, userId, createdAt } = data;
 
   const handleNavigate = (path) => {
     handleNavigate("/video/" + path);

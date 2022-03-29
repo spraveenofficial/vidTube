@@ -4,4 +4,5 @@ export {
   getEachVideo,
   uploadVideoReducer,
   getVideoLike,
+  getLikedVideos,
 } from "./videos";

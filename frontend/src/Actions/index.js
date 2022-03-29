@@ -6,4 +6,5 @@ export {
   likeVideo,
   uploadVideo,
   fetchVideoLike,
+  fetchLikedVideos
 } from "./videos";

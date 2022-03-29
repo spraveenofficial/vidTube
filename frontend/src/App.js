@@ -10,6 +10,9 @@ import Video from "./Pages/Video";
 import Loader from "./Components/Loader";
 import Upload from "./Pages/Upload";
 import Channel from "./Pages/Channel";
+import Playlist from "./Pages/Playlist";
+import LikedVideo from "./Pages/LikedVideo";
+import { Fragment } from "react";
 import Sidebar from "./Components/Sidebar";
 function App() {
   const { loading } = useAuth();
@@ -22,11 +25,61 @@ function App() {
           <Navbar />
           <div className="homepage">
             <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/video/:id" element={<Video />} />
+              <Route
+                path="/"
+                element={
+                  <Fragment>
+                    <Sidebar />
+                    <Home />
+                  </Fragment>
+                }
+              />
+              <Route
+                path="/video/:id"
+                element={
+                  <Fragment>
+                    <Sidebar />
+                    <Video />
+                  </Fragment>
+                }
+              />
               <Route element={<ProtectedRoutes />}>
-                <Route path="/upload" element={<Upload />} />
-                <Route path="/channel" element={<Channel />} />
+                <Route
+                  path="/liked-videos"
+                  element={
+                    <Fragment>
+                      <Sidebar />
+                      <LikedVideo />
+                    </Fragment>
+                  }
+                />
+                <Route
+                  path="/upload"
+                  element={
+                    <Fragment>
+                      <Sidebar />
+                      <Upload />
+                    </Fragment>
+                  }
+                />
+                <Route
+                  path="/playlist"
+                  element={
+                    <Fragment>
+                      <Sidebar />
+                      <Playlist />
+                    </Fragment>
+                  }
+                />
+                <Route
+                  path="/channel"
+                  element={
+                    <Fragment>
+                      <Sidebar />
+                      <Channel />
+                    </Fragment>
+                  }
+                />
               </Route>
               <Route element={<GuestRoutes />}>
                 <Route path="/signup" element={<Signup />} />

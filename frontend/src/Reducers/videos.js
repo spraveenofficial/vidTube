@@ -15,6 +15,9 @@ import {
   DECREASELIKE,
   INCREASEDISLIKE,
   DECREASEDISLIKE,
+  FETCH_LIKED_VIDEOS,
+  FETCH_LIKED_VIDEOS_SUCCESS,
+  FETCH_LIKED_VIDEOS_FAILURE,
 } from "../Constants/video";
 
 export const getHomeVideos = (state, action) => {
@@ -132,5 +135,31 @@ export const getVideoLike = (state, action) => {
         ...state,
         error: action.payload,
       };
+  }
+};
+
+export const getLikedVideos = (state, action) => {
+  switch (action.type) {
+    case FETCH_LIKED_VIDEOS:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FETCH_LIKED_VIDEOS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        videos: action.payload,
+        success: true,
+      };
+    case FETCH_LIKED_VIDEOS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+        success: false,
+      };
+    default:
+      return state;
   }
 };

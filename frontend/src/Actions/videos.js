@@ -11,6 +11,9 @@ import {
   FETCH_VIDEO_LIKE,
   FETCH_VIDEO_LIKE_SUCCESS,
   FETCH_VIDEO_LIKE_FAILURE,
+  FETCH_LIKED_VIDEOS,
+  FETCH_LIKED_VIDEOS_SUCCESS,
+  FETCH_LIKED_VIDEOS_FAILURE,
 } from "../Constants/video";
 import axios from "axios";
 import baseUrl from "../Utils/baseurl";
@@ -103,5 +106,21 @@ export const likeVideo = async (dispatch, videoId, type) => {
     return data.data.liked ? true : data.data.disliked ? true : false;
   } catch (error) {
     dispatch({ type: FETCH_VIDEO_LIKE_FAILURE, payload: error });
+  }
+};
+
+export const fetchLikedVideos = async (dispatch) => {
+  try {
+    dispatch({ type: FETCH_LIKED_VIDEOS });
+    const { data } = await axios({
+      url: `${baseUrl}/feelings/videos`,
+      method: "GET",
+      headers: {
+        token: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    dispatch({ type: FETCH_LIKED_VIDEOS_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: FETCH_LIKED_VIDEOS_FAILURE, payload: error });
   }
 };

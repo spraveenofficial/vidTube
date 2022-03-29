@@ -22,9 +22,9 @@ const Sidebar = () => {
             <span>Subscriptions</span>
           </div>
         </NavLink>
-        <NavLink activeclassname="active" to="/playlists">
+        <NavLink activeclassname="active" to="/playlist">
           <div className="menu-item">
-            <span>Playlists</span>
+            <span>Playlist</span>
           </div>
         </NavLink>
         <NavLink activeclassname="active" to="/liked-videos">
