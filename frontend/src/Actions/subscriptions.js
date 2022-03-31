@@ -33,7 +33,7 @@ export const subscribeChannel = async (channelId) => {
         channelId,
       },
     });
-    console.log(data);
+    return data.subscribed ? true : false;
   } catch (error) {
     console.log(error);
   }

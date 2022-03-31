@@ -77,6 +77,7 @@ export const fetchVideoLike = async (dispatch, videoId) => {
       type: FETCH_VIDEO_LIKE_SUCCESS,
       isLiked: data.data.liked,
       isDisliked: data.data.disliked,
+      isSubscribed: data.data.isSubscribed,
     });
   } catch (error) {
     console.log(error);

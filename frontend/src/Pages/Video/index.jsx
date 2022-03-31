@@ -10,25 +10,27 @@ import baseUrl from "../../Utils/baseurl";
 import NotFound from "../../Components/NotFound";
 import Toast from "../../Components/Toast";
 import { useState } from "react";
-import { useSubscribe } from "../../Hooks/subscriptions";
 const Video = () => {
   const [toast, setToast] = useState(false);
   const { id } = useParams();
-  const { subscribe } = useSubscribe();
-  const { states, handleLike, handleDisLike, isAuthenticated } =
-    useVideoLike(id);
-  const { liked, disLiked } = states;
+  const {
+    states,
+    handleLike,
+    handleDisLike,
+    isAuthenticated,
+    handleSubscribes,
+  } = useVideoLike(id);
+  const { liked, disLiked, isSubscribed } = states;
   const { state, dispatch } = useEachVideo(id);
   const { loading, video, success, error } = state;
   if (loading)
     return (
-        <div className="homepage-items wrapper flex">
-          {[1, 2, 3, 4, 5, 6].map((e) => (
-            <Skeleton key={e} />
-          ))}
-        </div>
+      <div className="homepage-items wrapper flex">
+        {[1, 2, 3, 4, 5, 6].map((e) => (
+          <Skeleton key={e} />
+        ))}
+      </div>
     );
-
   if (error) return <NotFound />;
   const { title, views, likes, dislikes, url, image, userId, createdAt, _id } =
     video.data;
@@ -40,7 +42,7 @@ const Video = () => {
     !isAuthenticated ? setToast((prev) => !prev) : handleDisLike(dispatch);
   };
   const handleSubscribe = async (id) => {
-    !isAuthenticated ? setToast((prev) => !prev) : subscribe(id);
+    !isAuthenticated ? setToast((prev) => !prev) : handleSubscribes(id);
   };
   return (
     !loading &&
@@ -84,8 +86,8 @@ const Video = () => {
                 </div>
                 <Button
                   onClick={() => handleSubscribe(userId._id)}
-                  className="btn btn-primary"
-                  name="Subscribe"
+                  className={`btn ${!isSubscribed ? "btn-primary" : "btn"}`}
+                  name={`${!isSubscribed ? "Subscribe" : "Un-Subscribe"}`}
                 />
               </div>
               <div className="video-channel-info__container__description">

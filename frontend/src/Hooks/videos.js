@@ -11,6 +11,7 @@ import {
   likeVideo,
   loadEachVideo,
   loadHomeVideos,
+  subscribeChannel,
   uploadVideo,
 } from "../Actions";
 import { useAuth } from "../Contexts/auth-context";
@@ -63,6 +64,7 @@ export const useVideoLike = (videoId) => {
   const initialState = {
     liked: false,
     disLiked: false,
+    isSubscribed: false,
   };
   const [states, dispatch] = useReducer(getVideoLike, initialState);
   useEffect(() => {
@@ -82,7 +84,21 @@ export const useVideoLike = (videoId) => {
       setDispatch({ type: "DECREASEDISLIKE" });
     }
   };
-  return { states, handleLike, handleDisLike, isAuthenticated };
+  const handleSubscribes = async (id) => {
+    const status = await subscribeChannel(id);
+    if (status) {
+      dispatch({ type: "UPDATE_SUBSCRIPTION", isSubscribed: true });
+    } else {
+      dispatch({ type: "UPDATE_SUBSCRIPTION", isSubscribed: false });
+    }
+  };
+  return {
+    states,
+    handleLike,
+    handleDisLike,
+    isAuthenticated,
+    handleSubscribes,
+  };
 };
 
 export const useLikedVideos = () => {
