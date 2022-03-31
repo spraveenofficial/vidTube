@@ -140,6 +140,8 @@
 @media (max-width: 767px) {
   .wrapper {
     padding: 0.625rem;
+    align-items: center;
+    justify-content: center;
     grid-template-columns: repeat(auto-fill, 45%);
   }
 }

@@ -14,6 +14,7 @@ import Playlist from "./Pages/Playlist";
 import LikedVideo from "./Pages/LikedVideo";
 import { Fragment } from "react";
 import Sidebar from "./Components/Sidebar";
+import Subscription from "./Pages/Subscription";
 function App() {
   const { loading } = useAuth();
   return (
@@ -23,70 +24,78 @@ function App() {
       ) : (
         <>
           <Navbar />
-          <div className="homepage">
-            <Routes>
+
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <div className="homepage">
+                  <Sidebar />
+                  <Home />
+                </div>
+              }
+            />
+            <Route
+              path="/video/:id"
+              element={
+                <div className="homepage">
+                  <Sidebar />
+                  <Video />
+                </div>
+              }
+            />
+            <Route element={<ProtectedRoutes />}>
               <Route
-                path="/"
+                path="/liked-videos"
                 element={
-                  <Fragment>
+                  <div className="homepage">
                     <Sidebar />
-                    <Home />
-                  </Fragment>
+                    <LikedVideo />
+                  </div>
                 }
               />
               <Route
-                path="/video/:id"
+                path="/subscriptions"
                 element={
-                  <Fragment>
+                  <div className="homepage">
                     <Sidebar />
-                    <Video />
-                  </Fragment>
+                    <Subscription />
+                  </div>
                 }
               />
-              <Route element={<ProtectedRoutes />}>
-                <Route
-                  path="/liked-videos"
-                  element={
-                    <Fragment>
-                      <Sidebar />
-                      <LikedVideo />
-                    </Fragment>
-                  }
-                />
-                <Route
-                  path="/upload"
-                  element={
-                    <Fragment>
-                      <Sidebar />
-                      <Upload />
-                    </Fragment>
-                  }
-                />
-                <Route
-                  path="/playlist"
-                  element={
-                    <Fragment>
-                      <Sidebar />
-                      <Playlist />
-                    </Fragment>
-                  }
-                />
-                <Route
-                  path="/channel"
-                  element={
-                    <Fragment>
-                      <Sidebar />
-                      <Channel />
-                    </Fragment>
-                  }
-                />
-              </Route>
-              <Route element={<GuestRoutes />}>
-                <Route path="/signup" element={<Signup />} />
-                <Route path="/login" element={<Login />} />
-              </Route>
-            </Routes>
-          </div>
+              <Route
+                path="/upload"
+                element={
+                  <div className="homepage">
+                    <Sidebar />
+                    <Upload />
+                  </div>
+                }
+              />
+              <Route
+                path="/playlist"
+                element={
+                  <div className="homepage">
+                    <Sidebar />
+                    <Playlist />
+                  </div>
+                }
+              />
+              <Route
+                path="/channel"
+                element={
+                  <div className="homepage">
+                    <Sidebar />
+                    <Channel />
+                  </div>
+                }
+              />
+            </Route>
+            <Route element={<GuestRoutes />}>
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/login" element={<Login />} />
+            </Route>
+          </Routes>
         </>
       )}
     </Router>

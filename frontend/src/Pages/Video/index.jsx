@@ -10,9 +10,11 @@ import baseUrl from "../../Utils/baseurl";
 import NotFound from "../../Components/NotFound";
 import Toast from "../../Components/Toast";
 import { useState } from "react";
+import { useSubscribe } from "../../Hooks/subscriptions";
 const Video = () => {
   const [toast, setToast] = useState(false);
   const { id } = useParams();
+  const { subscribe } = useSubscribe();
   const { states, handleLike, handleDisLike, isAuthenticated } =
     useVideoLike(id);
   const { liked, disLiked } = states;
@@ -20,13 +22,11 @@ const Video = () => {
   const { loading, video, success, error } = state;
   if (loading)
     return (
-      <div className="homepage-items">
-        <div className="wrapper flex">
+        <div className="homepage-items wrapper flex">
           {[1, 2, 3, 4, 5, 6].map((e) => (
             <Skeleton key={e} />
           ))}
         </div>
-      </div>
     );
 
   if (error) return <NotFound />;
@@ -39,10 +39,13 @@ const Video = () => {
   const handleDisLikes = async () => {
     !isAuthenticated ? setToast((prev) => !prev) : handleDisLike(dispatch);
   };
+  const handleSubscribe = async (id) => {
+    !isAuthenticated ? setToast((prev) => !prev) : subscribe(id);
+  };
   return (
     !loading &&
     success && (
-      <div className="video">
+      <div className="homepage-items video">
         <div className="video__container">
           <Player src={url} />
           <div className="videotitleData">
@@ -79,7 +82,11 @@ const Video = () => {
                     <span>{subscribers}</span> subscribers
                   </p>
                 </div>
-                <Button className="btn btn-primary" name="Subscribe" />
+                <Button
+                  onClick={() => handleSubscribe(userId._id)}
+                  className="btn btn-primary"
+                  name="Subscribe"
+                />
               </div>
               <div className="video-channel-info__container__description">
                 <p className="video-channel-info__container__description__text">
