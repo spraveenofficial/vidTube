@@ -3,7 +3,7 @@
   flex-direction: column;
   flex-shrink: 0;
   height: 90%;
-  
+  grid-area: asideleft;
   width: 250px;
   overflow-y: auto;
   overflow-x: none;

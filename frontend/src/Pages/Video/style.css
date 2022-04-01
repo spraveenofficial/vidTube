@@ -4,7 +4,6 @@
   position: relative;
   overflow: hidden;
   padding: 40px;
-  margin-left: 250px;
 }
 .video__container {
   width: 60%;
@@ -34,7 +33,7 @@
   gap: 10px;
   font-size: 20px;
 }
-.video-titles-buttons svg{
+.video-titles-buttons svg {
   cursor: pointer;
 }
 .video-channel-info {
@@ -46,10 +45,13 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 .video-channel-info__container__image__info {
-  width: 75%;
+  width: 70%;
+}
+.video-channel-info__container__image button {
+  min-width: fit-content;
 }
 .video-channel-info__container__description {
   margin-top: 1rem;

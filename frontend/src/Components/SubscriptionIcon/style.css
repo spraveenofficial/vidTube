@@ -1,0 +1,19 @@
+.channel-icons {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 140px;
+  cursor: pointer;
+}
+.channel-icons p {
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  margin: 0 5px 0 5px;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+}

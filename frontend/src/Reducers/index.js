@@ -6,3 +6,5 @@ export {
   getVideoLike,
   getLikedVideos,
 } from "./videos";
+
+export { getSubscriptions } from "./subscriptions";

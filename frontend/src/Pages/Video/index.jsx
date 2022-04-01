@@ -13,22 +13,24 @@ import { useState } from "react";
 const Video = () => {
   const [toast, setToast] = useState(false);
   const { id } = useParams();
-  const { states, handleLike, handleDisLike, isAuthenticated } =
-    useVideoLike(id);
-  const { liked, disLiked } = states;
+  const {
+    states,
+    handleLike,
+    handleDisLike,
+    isAuthenticated,
+    handleSubscribes,
+  } = useVideoLike(id);
+  const { liked, disLiked, isSubscribed } = states;
   const { state, dispatch } = useEachVideo(id);
   const { loading, video, success, error } = state;
   if (loading)
     return (
-      <div className="homepage-items">
-        <div className="wrapper flex">
-          {[1, 2, 3, 4, 5, 6].map((e) => (
-            <Skeleton key={e} />
-          ))}
-        </div>
+      <div className="homepage-items wrapper flex">
+        {[1, 2, 3, 4, 5, 6].map((e) => (
+          <Skeleton key={e} />
+        ))}
       </div>
     );
-
   if (error) return <NotFound />;
   const { title, views, likes, dislikes, url, image, userId, createdAt, _id } =
     video.data;
@@ -39,10 +41,13 @@ const Video = () => {
   const handleDisLikes = async () => {
     !isAuthenticated ? setToast((prev) => !prev) : handleDisLike(dispatch);
   };
+  const handleSubscribe = async (id) => {
+    !isAuthenticated ? setToast((prev) => !prev) : handleSubscribes(id);
+  };
   return (
     !loading &&
     success && (
-      <div className="video">
+      <div className="homepage-items video">
         <div className="video__container">
           <Player src={url} />
           <div className="videotitleData">
@@ -79,7 +84,11 @@ const Video = () => {
                     <span>{subscribers}</span> subscribers
                   </p>
                 </div>
-                <Button className="btn btn-primary" name="Subscribe" />
+                <Button
+                  onClick={() => handleSubscribe(userId._id)}
+                  className={`btn ${!isSubscribed ? "btn-primary" : "btn"}`}
+                  name={`${!isSubscribed ? "Subscribe" : "Un-Subscribe"}`}
+                />
               </div>
               <div className="video-channel-info__container__description">
                 <p className="video-channel-info__container__description__text">

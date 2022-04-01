@@ -18,6 +18,7 @@ import {
   FETCH_LIKED_VIDEOS,
   FETCH_LIKED_VIDEOS_SUCCESS,
   FETCH_LIKED_VIDEOS_FAILURE,
+  UPDATE_SUBSCRIPTION,
 } from "../Constants/video";
 
 export const getHomeVideos = (state, action) => {
@@ -119,6 +120,7 @@ export const uploadVideoReducer = (state, action) => {
 };
 
 export const getVideoLike = (state, action) => {
+  console.log(action);
   switch (action.type) {
     case FETCH_VIDEO_LIKE:
       return {
@@ -129,6 +131,12 @@ export const getVideoLike = (state, action) => {
         ...state,
         liked: action.isLiked,
         disLiked: action.isDisliked,
+        isSubscribed: state.isSubscribed === true ? true : action.isSubscribed,
+      };
+    case UPDATE_SUBSCRIPTION:
+      return {
+        ...state,
+        isSubscribed: action.isSubscribed,
       };
     case FETCH_VIDEO_LIKE_FAILURE:
       return {

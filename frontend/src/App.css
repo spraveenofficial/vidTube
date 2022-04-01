@@ -90,6 +90,9 @@ a {
   color: var(--black-color);
   text-decoration: none;
 }
+body.modal-window {
+  overflow: hidden;
+}
 
 /* Utilities Class */
 .pointer {
