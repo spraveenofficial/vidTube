@@ -149,7 +149,9 @@ body.modal-window {
 .pb-10 {
   padding-bottom: 0.625rem;
 }
-
+.p {
+  padding: 0.625rem;
+}
 .active div {
   border-top-left-radius: 40px;
   background: #adc1e9;

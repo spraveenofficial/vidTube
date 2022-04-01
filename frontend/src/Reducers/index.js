@@ -8,3 +8,5 @@ export {
 } from "./videos";
 
 export { getSubscriptions } from "./subscriptions";
+
+export { fetchPlaylist } from "./playlist";

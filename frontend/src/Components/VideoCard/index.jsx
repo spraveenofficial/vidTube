@@ -23,7 +23,7 @@ const VideoCard = ({ data }) => {
             </svg>
           </div>
           <div className="preview">
-            <img src={`${baseUrl}/${url}`} />
+            <img src={`${baseUrl}/${thumbnailUrl}`} />
           </div>
           <button className="watch-later-button">
             <svg viewBox="0 0 24 24">

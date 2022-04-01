@@ -255,14 +255,14 @@ const Navbar = () => {
                 </p>
                 <p
                   onClick={() =>
-                    navigate("/subscription") || setNav(!setNav)
+                    navigate("/subscriptions") || setNav(!setNav)
                   }
                 >
                   Subscriptions
                 </p>
                 <p
                   onClick={() =>
-                    navigate("/playlists") || setNav(!setNav)
+                    navigate("/playlist") || setNav(!setNav)
                   }
                 >
                   Playlists

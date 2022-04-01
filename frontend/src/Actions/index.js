@@ -10,3 +10,5 @@ export {
 } from "./videos";
 
 export { loadSubscriptions, subscribeChannel } from "./subscriptions";
+
+export { fetchPlaylistAction } from "./playlist";

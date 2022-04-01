@@ -4,9 +4,54 @@
   padding: 1rem;
   width: 100%;
 }
+.no-playlist {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.playlist-content {
+  padding: 0 1rem;
+}
+.playlist-item-content-item-title {
+  height: 200px;
+}
+.playlist-item-content-item-title .clip {
+  display: flex;
+  margin-bottom: 0.7rem;
+  gap: 1rem;
+}
+.playlist-item-content-item-title .clip section.preview-container,
+.playlist section.preview-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+}
+.playlist-item-content-item-title .clip section.preview-container {
+  height: 200px;
+}
+.playlist-item-content-item-title .clip .preview img {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.playlist-item-content-item-title .clip .content-container {
+  width: 100%;
+  height: 100%;
+}
+.playlist-item-content-item-title .clip .preview-container {
+  width: 40% !important;
+  height: 100%;
+}
 
 @media (max-width: 768px) {
   .playlist {
     margin: 0;
+  }
+  .playlist-item-content-item-title .clip .preview-container {
+    width: 100% !important;
+    height: 200px;
   }
 }
