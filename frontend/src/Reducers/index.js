@@ -9,4 +9,4 @@ export {
 
 export { getSubscriptions } from "./subscriptions";
 
-export { fetchPlaylist } from "./playlist";
+export { fetchPlaylist, addPlaylist } from "./playlist";

@@ -13,6 +13,11 @@
 .playlist-content {
   padding: 0 1rem;
 }
+.playlist-item-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 .playlist-item-content-item-title {
   height: 200px;
 }

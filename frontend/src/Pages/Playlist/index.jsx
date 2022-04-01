@@ -3,13 +3,20 @@ import "./style.css";
 import { useCreatePlaylist, usePlaylist } from "../../Hooks/playlist";
 import Loader from "../../Components/Loader";
 import VideoCard from "../../Components/VideoCard";
+import { DeleteIcon } from "../../Components/Icons";
 const Playlist = () => {
-  const { openModalClick, showModal } = useCreatePlaylist();
   const { loading, playlist, success } = usePlaylist();
   if (loading) {
     return (
       <div className="homepage-items">
         <Loader />
+      </div>
+    );
+  }
+  if (playlist.count === 0 || !success) {
+    return (
+      <div className="homepage-items">
+        <h2 className="mt-10 ml-20">No Playlist Found</h2>
       </div>
     );
   }
@@ -20,9 +27,6 @@ const Playlist = () => {
           <div className="playlist-title">
             <h1>Playlists</h1>
           </div>
-          <div className="add-playlist-btn">
-            <Button onClick={() => openModalClick()} name="Add Playlist" />
-          </div>
         </div>
         <div className="playlist-content">
           {playlist.data.map((playlist, index) => (
@@ -31,6 +35,7 @@ const Playlist = () => {
                 <h2>
                   {index + 1}. {playlist.name}
                 </h2>
+                <DeleteIcon />
               </div>
               <div className="playlist-item-content">
                 <div className="playlist-item-content-item">
@@ -50,7 +55,6 @@ const Playlist = () => {
             </div>
           ))}
         </div>
-        {showModal()}
       </div>
     )
   );

@@ -1,5 +1,5 @@
 import "./style.css";
-import { LikeIcon, DislikeIcon } from "../../Components/Icons";
+import { LikeIcon, DislikeIcon, PlaylistIcon } from "../../Components/Icons";
 import Button from "../../Components/Button";
 import Player from "../../Components/Player";
 import { useEachVideo, useVideoLike } from "../../Hooks/videos";
@@ -10,9 +10,11 @@ import baseUrl from "../../Utils/baseurl";
 import NotFound from "../../Components/NotFound";
 import Toast from "../../Components/Toast";
 import { useState } from "react";
+import { useCreatePlaylist } from "../../Hooks/playlist";
 const Video = () => {
   const [toast, setToast] = useState(false);
   const { id } = useParams();
+  const { openModalClick, showModal } = useCreatePlaylist(id);
   const {
     states,
     handleLike,
@@ -69,6 +71,7 @@ const Video = () => {
                   onClick={() => handleDisLikes(_id)}
                 />
                 {dislikes}
+                <PlaylistIcon onClick={() => openModalClick()} />
               </div>
             </div>
           </div>
@@ -99,6 +102,8 @@ const Video = () => {
             </div>
           </div>
         </div>
+        {showModal()}
+
         {toast && <Toast message="You are not authenticated." />}
       </div>
     )

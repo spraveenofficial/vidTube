@@ -12,7 +12,6 @@ import Upload from "./Pages/Upload";
 import Channel from "./Pages/Channel";
 import Playlist from "./Pages/Playlist";
 import LikedVideo from "./Pages/LikedVideo";
-import { Fragment } from "react";
 import Sidebar from "./Components/Sidebar";
 import Subscription from "./Pages/Subscription";
 function App() {
@@ -24,7 +23,6 @@ function App() {
       ) : (
         <>
           <Navbar />
-
           <Routes>
             <Route
               path="/"
