@@ -242,9 +242,6 @@ const Navbar = () => {
               </svg>
               <div className="mobile-nav-items">
                 <p onClick={() => navigate("/") || setNav(!setNav)}>Home</p>
-                <p onClick={() => navigate("/trending") || setNav(!setNav)}>
-                  Trending
-                </p>
                 <p
                   onClick={() => navigate("/subscriptions") || setNav(!setNav)}
                 >
