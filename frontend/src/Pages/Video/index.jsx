@@ -71,7 +71,13 @@ const Video = () => {
                   onClick={() => handleDisLikes(_id)}
                 />
                 {dislikes}
-                <PlaylistIcon onClick={() => openModalClick()} />
+                <PlaylistIcon
+                  onClick={() =>
+                    !isAuthenticated
+                      ? setToast((prev) => !prev)
+                      : openModalClick()
+                  }
+                />
               </div>
             </div>
           </div>

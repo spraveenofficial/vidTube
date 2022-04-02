@@ -20,6 +20,7 @@
 }
 .playlist-item-content-item-title {
   height: 200px;
+  margin-bottom: 1rem;
 }
 .playlist-item-content-item-title .clip {
   display: flex;

@@ -17,7 +17,6 @@ const usePlaylist = () => {
     fetchPlaylistAction(dispatch);
   }, []);
   const { loading, playlist, error, success } = state;
-  console.log(playlist);
   return { loading, playlist, error, success, dispatch };
 };
 
