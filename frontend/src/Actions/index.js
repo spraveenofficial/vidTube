@@ -12,3 +12,4 @@ export {
 export { loadSubscriptions, subscribeChannel } from "./subscriptions";
 
 export { fetchPlaylistAction, addPlaylistAction } from "./playlist";
+export { fetchHistoryAction, updateHistoryAction } from "./history";

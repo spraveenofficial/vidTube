@@ -10,3 +10,5 @@ export {
 export { getSubscriptions } from "./subscriptions";
 
 export { fetchPlaylist, addPlaylist } from "./playlist";
+
+export { fetchHistory } from "./history";

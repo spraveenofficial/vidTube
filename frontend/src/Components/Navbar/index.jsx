@@ -241,38 +241,23 @@ const Navbar = () => {
                 <path d="M15.04 12L24 2.96 21.04 0 12 8.96 3.04 0 0 2.96 9.04 12 0 20.96 3.04 24 12 14.96 21.04 24 24 20.96z"></path>
               </svg>
               <div className="mobile-nav-items">
-                <p
-                  onClick={() => navigate("/") || setNav(!setNav)}
-                >
-                  Home
-                </p>
-                <p
-                  onClick={() =>
-                    navigate("/trending") || setNav(!setNav)
-                  }
-                >
+                <p onClick={() => navigate("/") || setNav(!setNav)}>Home</p>
+                <p onClick={() => navigate("/trending") || setNav(!setNav)}>
                   Trending
                 </p>
                 <p
-                  onClick={() =>
-                    navigate("/subscriptions") || setNav(!setNav)
-                  }
+                  onClick={() => navigate("/subscriptions") || setNav(!setNav)}
                 >
                   Subscriptions
                 </p>
-                <p
-                  onClick={() =>
-                    navigate("/playlist") || setNav(!setNav)
-                  }
-                >
+                <p onClick={() => navigate("/playlist") || setNav(!setNav)}>
                   Playlists
                 </p>
-                <p
-                  onClick={() =>
-                    navigate("/liked-videos") || setNav(!setNav)
-                  }
-                >
+                <p onClick={() => navigate("/liked-videos") || setNav(!setNav)}>
                   Liked Videos
+                </p>
+                <p onClick={() => navigate("/history") || setNav(!setNav)}>
+                  History
                 </p>
               </div>
             </motion.div>
