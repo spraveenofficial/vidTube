@@ -14,6 +14,7 @@ import Playlist from "./Pages/Playlist";
 import LikedVideo from "./Pages/LikedVideo";
 import Sidebar from "./Components/Sidebar";
 import Subscription from "./Pages/Subscription";
+import History from "./Pages/History";
 function App() {
   const { loading } = useAuth();
   return (
@@ -85,6 +86,15 @@ function App() {
                   <div className="homepage">
                     <Sidebar />
                     <Channel />
+                  </div>
+                }
+              />
+              <Route
+                path="/history"
+                element={
+                  <div className="homepage">
+                    <Sidebar />
+                    <History />
                   </div>
                 }
               />

@@ -12,6 +12,7 @@ import {
   loadEachVideo,
   loadHomeVideos,
   subscribeChannel,
+  updateHistoryAction,
   uploadVideo,
 } from "../Actions";
 import { useAuth } from "../Contexts/auth-context";
@@ -32,6 +33,7 @@ export const useHomePageVideos = () => {
 };
 
 export const useEachVideo = (videoId) => {
+  const { isAuthenticated } = useAuth();
   const initialState = {
     video: {},
     loading: true,
@@ -41,6 +43,9 @@ export const useEachVideo = (videoId) => {
   const [state, dispatch] = useReducer(getEachVideo, initialState);
   useEffect(() => {
     loadEachVideo(dispatch, videoId);
+    return () => {
+      isAuthenticated && updateHistoryAction(videoId);
+    };
   }, []);
   return { state, dispatch };
 };
