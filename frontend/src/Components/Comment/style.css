@@ -1,0 +1,10 @@
+.comment-write {
+  min-height: 150px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-write button {
+  float: right;
+}

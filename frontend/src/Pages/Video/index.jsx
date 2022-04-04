@@ -10,6 +10,7 @@ import baseUrl from "../../Utils/baseurl";
 import NotFound from "../../Components/NotFound";
 import Toast from "../../Components/Toast";
 import { useState } from "react";
+import Comment from "../../Components/Comment";
 import { useCreatePlaylist } from "../../Hooks/playlist";
 const Video = () => {
   const [toast, setToast] = useState(false);
@@ -106,6 +107,7 @@ const Video = () => {
                 </p>
               </div>
             </div>
+            <Comment />
           </div>
         </div>
         {showModal()}
