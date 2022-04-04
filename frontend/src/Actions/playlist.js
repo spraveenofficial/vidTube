@@ -42,3 +42,19 @@ export const addPlaylistAction = async (dispatch, payload) => {
     dispatch({ type: ADD_PLAYLIST_FAILURE, payload: err.message });
   }
 };
+
+export const addVideoToExistingPlaylist = async (playlistId, videoId) => {
+  
+  try {
+    const { data } = await axios({
+      method: "PUT",
+      url: `${baseurl}/playlist/addVideo/${playlistId}/${videoId}`,
+      headers: {
+        token: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -12,7 +12,7 @@ const History = () => {
       </div>
     );
   }
-  if (history.count === 0 || !success) {
+  if (history.count === 0 || (!loading && !success)) {
     return (
       <div className="homepage-items">
         <h2 className="mt-10 ml-20">No History Found</h2>

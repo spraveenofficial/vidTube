@@ -10,6 +10,10 @@
   justify-content: center;
   align-items: center;
 }
+
+.playlist-item {
+  height: 100vh;
+}
 .playlist-content {
   padding: 0 1rem;
 }
@@ -52,6 +56,18 @@
   height: 100%;
 }
 
+/* Playlist Modal CSS */
+
+.select-playlist-to-save {
+  align-items: center;
+  gap: 10px;
+  display: flex;
+}
+
+.select-playlist-to-save input[type="checkbox"] {
+  height: 15px;
+  width: 15px;
+}
 @media (max-width: 768px) {
   .playlist {
     margin: 0;

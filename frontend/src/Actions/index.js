@@ -11,5 +11,9 @@ export {
 
 export { loadSubscriptions, subscribeChannel } from "./subscriptions";
 
-export { fetchPlaylistAction, addPlaylistAction } from "./playlist";
+export {
+  fetchPlaylistAction,
+  addPlaylistAction,
+  addVideoToExistingPlaylist,
+} from "./playlist";
 export { fetchHistoryAction, updateHistoryAction } from "./history";

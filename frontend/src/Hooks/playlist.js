@@ -3,9 +3,15 @@ import Modal from "../Components/Modal";
 import Input from "../Components/Input";
 import Button from "../Components/Button";
 import { addPlaylist, fetchPlaylist } from "../Reducers";
-import { addPlaylistAction, fetchPlaylistAction } from "../Actions";
+import {
+  addPlaylistAction,
+  addVideoToExistingPlaylist,
+  fetchPlaylistAction,
+} from "../Actions";
+import { useAuth } from "../Contexts/auth-context";
 
 const usePlaylist = () => {
+  const { isAuthenticated } = useAuth();
   const initialState = {
     loading: false,
     playlist: [],
@@ -14,13 +20,16 @@ const usePlaylist = () => {
   };
   const [state, dispatch] = useReducer(fetchPlaylist, initialState);
   useEffect(() => {
-    fetchPlaylistAction(dispatch);
+    isAuthenticated && fetchPlaylistAction(dispatch);
   }, []);
   const { loading, playlist, error, success } = state;
   return { loading, playlist, error, success, dispatch };
 };
 
 const useCreatePlaylist = (id) => {
+  const { playlist } = usePlaylist();
+  const [isSelected, setSelected] = useState(null);
+  const { data } = playlist;
   const [userInput, setUserInput] = useState({
     name: "",
     description: "",
@@ -45,6 +54,12 @@ const useCreatePlaylist = (id) => {
       setModal(false);
     }
   };
+  const handleExistingPlaylist = async () => {
+    const status = await addVideoToExistingPlaylist(isSelected, id);
+    if (status) {
+      setModal(false);
+    }
+  };
   const handleChange = (event) => {
     setUserInput({
       ...userInput,
@@ -55,6 +70,31 @@ const useCreatePlaylist = (id) => {
     modal && (
       <Modal onClose={() => closeModalClick(0)}>
         <div className="customized-model-playlist">
+          <div className="customized-model-playlist-header">
+            {data.length == 0 ? (
+              <Button name="Testing" />
+            ) : (
+              data.map((item) => {
+                return (
+                  <div className="select-playlist-to-save">
+                    <input
+                      onChange={() => setSelected(item._id)}
+                      type="checkbox"
+                      checked={isSelected == item._id}
+                    />
+                    {item.name}
+                  </div>
+                );
+              })
+            )}
+          </div>
+          {isSelected && (
+            <Button
+              onClick={() => handleExistingPlaylist()}
+              className="mt-10 full-width btn"
+              name="Add to playlist"
+            />
+          )}
           <h1>Create Playlist</h1>
           <Input
             name="name"
