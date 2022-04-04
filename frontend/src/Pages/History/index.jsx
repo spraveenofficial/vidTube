@@ -30,7 +30,6 @@ const History = () => {
               {history.data[0].videos.map((video, index) => (
                 <VideoCard key={index} data={video} />
               ))}
-              {console.log(history.data[0].videos)}
             </div>
           </div>
         </div>

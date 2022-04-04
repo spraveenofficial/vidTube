@@ -44,7 +44,6 @@ export const useEachVideo = (videoId) => {
   useEffect(() => {
     loadEachVideo(dispatch, videoId);
     return () => {
-      console.log(state.success);
       isAuthenticated && updateHistoryAction(videoId);
     };
   }, []);
