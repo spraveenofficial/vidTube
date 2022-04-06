@@ -48,7 +48,7 @@ Live Demo: [here](https://vidtubes.vercel.app/)
 - Channel Subscribe
 - Like/Dislike Videos
 - Add Videos to Playlist
-- JWT based fully Authentication
+- JWT based Authentication
 
 ---
 
@@ -65,6 +65,6 @@ Live Demo: [here](https://vidtubes.vercel.app/)
 
 ## Preview
 
-<img src="/src/assets/Preview.gif" alt="VidTube Video Library" />
+<img src="/frontend/public/images/demo.jpg" alt="VidTube Video Library" />
 
 
