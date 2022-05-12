@@ -20,9 +20,15 @@ const Home = () => {
     success && (
       <div className="homepage-items">
         <div className="wrapper">
-          {videos.data.map((video, index) => (
-            <VideoCard key={index} data={video} />
-          ))}
+          {videos.data.length > 0 ? (
+            videos.data.map((video, index) => (
+              <VideoCard key={index} data={video} />
+            ))
+          ) : (
+            <div className="w-max">
+              <h1>No Videos Found</h1>
+            </div>
+          )}
         </div>
       </div>
     )

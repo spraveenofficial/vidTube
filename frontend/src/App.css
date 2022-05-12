@@ -152,6 +152,10 @@ body.modal-window {
 .p {
   padding: 0.625rem;
 }
+
+.w-max {
+  width: max-content;
+}
 .active div {
   border-top-left-radius: 40px;
   background: #adc1e9;

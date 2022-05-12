@@ -17,6 +17,7 @@ const Upload = () => {
     title: "",
     description: "",
   });
+  console.log(selectedFile);
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };

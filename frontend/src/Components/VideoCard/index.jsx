@@ -1,19 +1,21 @@
 import "./style.css";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
-import baseUrl from "../../Utils/baseurl";
+
 const VideoCard = ({ data }) => {
   const navigate = useNavigate();
-  const { id, title, url, thumbnailUrl, views, userId, createdAt } = data;
-
-  const handleNavigate = (path) => {
-    handleNavigate("/video/" + path);
-  };
+  const { id, title, thumbnailUrl, views, userId, createdAt, duration } = data;
+  const durationMinutes = Math.floor(duration / 60);
+  const durationSeconds = duration - durationMinutes * 60;
+  const durationFormatted =
+    durationMinutes > 0
+      ? `${durationMinutes}.${durationSeconds.toFixed()} min`
+      : `${durationSeconds} sec`;
   return (
     <div onClick={() => navigate(`/video/${id}`)} className="clip">
       <section className="preview-container">
-        <img src={`${baseUrl}/${thumbnailUrl}`} />
-        <span className="time-status">5:15</span>
+        <img src={thumbnailUrl} alt="video" />
+        <span className="time-status">{durationFormatted}</span>
         <div className="overlay-preview">
           <div className="play-icon">
             <svg viewBox="0 0 24 24" className="style-scope yt-icon">
@@ -23,7 +25,7 @@ const VideoCard = ({ data }) => {
             </svg>
           </div>
           <div className="preview">
-            <img src={`${baseUrl}/${thumbnailUrl}`} />
+            <img src={thumbnailUrl} alt="video" />
           </div>
           <button className="watch-later-button">
             <svg viewBox="0 0 24 24">
