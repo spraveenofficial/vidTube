@@ -65,7 +65,7 @@ export const useVideoUpload = () => {
 };
 
 export const useVideoLike = (videoId) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const initialState = {
     liked: false,
     disLiked: false,
@@ -77,7 +77,7 @@ export const useVideoLike = (videoId) => {
   }, []);
   const handleLike = async (setDispatch) => {
     const status = await likeVideo(dispatch, videoId, "like");
-    status == true
+    status === true
       ? setDispatch({ type: "INCREASELIKE" })
       : setDispatch({ type: "DECREASELIKE" });
   };
@@ -103,6 +103,7 @@ export const useVideoLike = (videoId) => {
     handleDisLike,
     isAuthenticated,
     handleSubscribes,
+    userData: user,
   };
 };
 

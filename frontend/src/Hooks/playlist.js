@@ -21,7 +21,7 @@ const usePlaylist = () => {
   const [state, dispatch] = useReducer(fetchPlaylist, initialState);
   useEffect(() => {
     isAuthenticated && fetchPlaylistAction(dispatch);
-  }, []);
+  }, [isAuthenticated]);
   const { loading, playlist, error, success } = state;
   return { loading, playlist, error, success, dispatch };
 };

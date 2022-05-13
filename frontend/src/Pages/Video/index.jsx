@@ -14,6 +14,7 @@ import Comment from "../../Components/Comment";
 import { useCreatePlaylist } from "../../Hooks/playlist";
 const Video = () => {
   const [toast, setToast] = useState(false);
+  const [message, setMessage] = useState("");
   const { id } = useParams();
   const { openModalClick, showModal } = useCreatePlaylist(id);
   const {
@@ -22,6 +23,7 @@ const Video = () => {
     handleDisLike,
     isAuthenticated,
     handleSubscribes,
+    userData,
   } = useVideoLike(id);
   const { liked, disLiked, isSubscribed } = states;
   const { state, dispatch } = useEachVideo(id);
@@ -35,7 +37,7 @@ const Video = () => {
       </div>
     );
   if (error) return <NotFound />;
-  const { title, views, likes, dislikes, url, image, userId, createdAt, _id } =
+  const { title, views, likes, dislikes, url, userId, createdAt, _id } =
     video.data;
   const { channelName, subscribers, photoUrl } = userId;
   const handleLikes = () => {
@@ -45,12 +47,19 @@ const Video = () => {
     !isAuthenticated ? setToast((prev) => !prev) : handleDisLike(dispatch);
   };
   const handleSubscribe = async (id) => {
-    !isAuthenticated ? setToast((prev) => !prev) : handleSubscribes(id);
+    if (!isAuthenticated) {
+      setToast((prev) => !prev);
+    } else if (userData.id === id) {
+      setToast((prev) => !prev);
+      setMessage("You can't subscribe to your own channel");
+    } else {
+      handleSubscribes(dispatch, id);
+    }
   };
   return (
     !loading &&
     success && (
-      <div className="homepage-items video">
+      <div className="homepage-items video flex">
         <div className="video__container">
           <Player src={url} />
           <div className="videotitleData">
@@ -111,8 +120,18 @@ const Video = () => {
           </div>
         </div>
         {showModal()}
-
-        {toast && <Toast message="You are not authenticated." />}
+        <div className="notes">
+          <h2>Your Notes</h2>
+          <div className="notes-box">
+            <div className="notes-input">
+              <input type="text" placeholder="Enter Note" />
+              <button className="btn">Add</button>
+            </div>
+          </div>
+        </div>
+        {toast && (
+          <Toast message={message ? message : "You are not authenticated."} />
+        )}
       </div>
     )
   );

@@ -77,6 +77,7 @@ const Upload = () => {
                 label="Select Thumbnail"
                 type="file"
                 onChange={(e) => setThumbnailFile(e.target.files[0])}
+                accept="image/png, image/jpeg"
               />
               <Input
                 label="Channel Name"
