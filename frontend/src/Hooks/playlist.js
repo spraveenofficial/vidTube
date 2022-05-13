@@ -71,8 +71,8 @@ const useCreatePlaylist = (id) => {
       <Modal onClose={() => closeModalClick(0)}>
         <div className="customized-model-playlist">
           <div className="customized-model-playlist-header">
-            {data.length == 0 ? (
-              <Button name="Testing" />
+            {data.length === 0 ? (
+              <h1>Create a new playlist</h1>
             ) : (
               data.map((item) => {
                 return (
@@ -80,7 +80,7 @@ const useCreatePlaylist = (id) => {
                     <input
                       onChange={() => setSelected(item._id)}
                       type="checkbox"
-                      checked={isSelected == item._id}
+                      checked={isSelected === item._id}
                     />
                     {item.name}
                   </div>

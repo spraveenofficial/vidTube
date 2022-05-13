@@ -1,10 +1,9 @@
 import "./style.css";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
-
 const VideoCard = ({ data }) => {
   const navigate = useNavigate();
-  const { id, title, thumbnailUrl, views, userId, createdAt, duration } = data;
+  const { id, title, thumbnailUrl, views, userId, duration, createdAt } = data;
   const durationMinutes = Math.floor(duration / 60);
   const durationSeconds = duration - durationMinutes * 60;
   const durationFormatted =

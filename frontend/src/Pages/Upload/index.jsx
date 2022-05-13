@@ -5,7 +5,7 @@ import Button from "../../Components/Button";
 import { useAuth } from "../../Contexts/auth-context";
 import Toast from "../../Components/Toast";
 import { useVideoUpload } from "../../Hooks/videos";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const Upload = () => {
   const { user } = useAuth();
   const { state, upload } = useVideoUpload();
@@ -17,7 +17,20 @@ const Upload = () => {
     title: "",
     description: "",
   });
-  console.log(selectedFile);
+  const getDuration = (file) => {
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (e) => {
+      var video = document.createElement("video");
+      video.src = e.target.result;
+      video.onloadedmetadata = (e) => {
+        setUserData({ ...userData, duration: video.duration });
+      };
+    };
+  };
+  useEffect(() => {
+    selectedFile && getDuration(selectedFile);
+  }, [selectedFile]);
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
@@ -28,6 +41,7 @@ const Upload = () => {
     formData.append("thumbnail", selectedThumnail);
     formData.append("title", userData.title);
     formData.append("description", userData.description);
+    formData.append("duration", userData.duration);
     await upload(formData);
   };
   return (
