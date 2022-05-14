@@ -14,6 +14,7 @@ import {
   subscribeChannel,
   updateHistoryAction,
   uploadVideo,
+  createNotes,
 } from "../Actions";
 import { useAuth } from "../Contexts/auth-context";
 import { useReducer, useEffect } from "react";
@@ -70,6 +71,7 @@ export const useVideoLike = (videoId) => {
     liked: false,
     disLiked: false,
     isSubscribed: false,
+    notes: [],
   };
   const [states, dispatch] = useReducer(getVideoLike, initialState);
   useEffect(() => {
@@ -97,6 +99,19 @@ export const useVideoLike = (videoId) => {
       dispatch({ type: "UPDATE_SUBSCRIPTION", isSubscribed: false });
     }
   };
+  const handleCreateNotes = async (videoId, notes) => {
+    const payload = {
+      videoId,
+      notes,
+      createdAt: new Date(),
+    };
+    const status = await createNotes(payload);
+    // if (status) {
+    //   dispatch({ type: "UPDATE_NOTES", isNotes: true });
+    // } else {
+    //   dispatch({ type: "UPDATE_NOTES", isNotes: false });
+    // }
+  };
   return {
     states,
     handleLike,
@@ -104,6 +119,7 @@ export const useVideoLike = (videoId) => {
     isAuthenticated,
     handleSubscribes,
     userData: user,
+    handleCreateNotes,
   };
 };
 

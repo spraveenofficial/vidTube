@@ -35,7 +35,6 @@ export const updateHistoryAction = async (video) => {
         video: video,
       },
     });
-    console.log(data);
   } catch (error) {
     console.log(error);
   }

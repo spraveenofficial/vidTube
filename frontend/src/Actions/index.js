@@ -7,6 +7,7 @@ export {
   uploadVideo,
   fetchVideoLike,
   fetchLikedVideos,
+  createNotes,
 } from "./videos";
 
 export { loadSubscriptions, subscribeChannel } from "./subscriptions";

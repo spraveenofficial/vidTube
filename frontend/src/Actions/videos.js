@@ -78,6 +78,7 @@ export const fetchVideoLike = async (dispatch, videoId) => {
       isLiked: data.data.liked,
       isDisliked: data.data.disliked,
       isSubscribed: data.data.isSubscribed,
+      notes: data.data.notes,
     });
   } catch (error) {
     console.log(error);
@@ -123,5 +124,30 @@ export const fetchLikedVideos = async (dispatch) => {
     dispatch({ type: FETCH_LIKED_VIDEOS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: FETCH_LIKED_VIDEOS_FAILURE, payload: error });
+  }
+};
+
+export const createNotes = async (payload) => {
+  try {
+    // dispatch({ type: FETCH_VIDEO_LIKE });
+    const { data } = await axios({
+      url: `${baseUrl}/video/notes`,
+      method: "POST",
+      data: {
+        notes: payload,
+      },
+      headers: {
+        token: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    console.log(data);
+    // dispatch({
+    //   type: FETCH_VIDEO_LIKE_SUCCESS,
+    //   isLiked: data.data.liked,
+    //   isDisliked: data.data.disliked,
+    // });
+    // return data.data.liked ? true : data.data.disliked ? true : false;
+  } catch (error) {
+    // dispatch({ type: FETCH_VIDEO_LIKE_FAILURE, payload: error });
   }
 };

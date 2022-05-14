@@ -15,6 +15,7 @@ import { useCreatePlaylist } from "../../Hooks/playlist";
 const Video = () => {
   const [toast, setToast] = useState(false);
   const [message, setMessage] = useState("");
+  const [userNotes, setUserNotes] = useState("");
   const { id } = useParams();
   const { openModalClick, showModal } = useCreatePlaylist(id);
   const {
@@ -23,9 +24,10 @@ const Video = () => {
     handleDisLike,
     isAuthenticated,
     handleSubscribes,
+    handleCreateNotes,
     userData,
   } = useVideoLike(id);
-  const { liked, disLiked, isSubscribed } = states;
+  const { liked, disLiked, isSubscribed, notes } = states;
   const { state, dispatch } = useEachVideo(id);
   const { loading, video, success, error } = state;
   if (loading)
@@ -56,6 +58,15 @@ const Video = () => {
       handleSubscribes(dispatch, id);
     }
   };
+
+  const handleNotes = async () => {
+    if (!isAuthenticated) {
+      setToast((prev) => !prev);
+    } else {
+      handleCreateNotes(id, userNotes);
+    }
+  };
+
   return (
     !loading &&
     success && (
@@ -123,9 +134,30 @@ const Video = () => {
         <div className="notes">
           <h2>Your Notes</h2>
           <div className="notes-box">
+            <div className="notes-content">
+              {notes.length > 0 ? (
+                notes.map((e) => (
+                  <div className="notes-content__item" key={e._id}>
+                    <p className="notes-content__item__title">{e.note}</p>
+                    <p className="notes-content__item__content">
+                      {moment(e.createdAt).fromNow()}
+                    </p>
+                  </div>
+                ))
+              ) : (
+                <p>No notes yet</p>
+              )}
+            </div>
             <div className="notes-input">
-              <input type="text" placeholder="Enter Note" />
-              <button className="btn">Add</button>
+              <input
+                onChange={(e) => setUserNotes(e.target.value)}
+                type="text"
+                placeholder="Enter Note"
+                value={userNotes}
+              />
+              <button onClick={handleNotes} className="btn">
+                Add
+              </button>
             </div>
           </div>
         </div>

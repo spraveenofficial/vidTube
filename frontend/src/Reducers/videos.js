@@ -120,7 +120,6 @@ export const uploadVideoReducer = (state, action) => {
 };
 
 export const getVideoLike = (state, action) => {
-  console.log(action);
   switch (action.type) {
     case FETCH_VIDEO_LIKE:
       return {
@@ -132,6 +131,7 @@ export const getVideoLike = (state, action) => {
         liked: action.isLiked,
         disLiked: action.isDisliked,
         isSubscribed: state.isSubscribed === true ? true : action.isSubscribed,
+        notes: action.notes,
       };
     case UPDATE_SUBSCRIPTION:
       return {
@@ -143,6 +143,8 @@ export const getVideoLike = (state, action) => {
         ...state,
         error: action.payload,
       };
+    default:
+      return state;
   }
 };
 
