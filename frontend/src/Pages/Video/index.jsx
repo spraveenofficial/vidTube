@@ -63,7 +63,13 @@ const Video = () => {
     if (!isAuthenticated) {
       setToast((prev) => !prev);
     } else {
-      handleCreateNotes(id, userNotes);
+      const status = await handleCreateNotes(id, userNotes);
+      if (status) {
+        setUserNotes("");
+        return setMessage("Notes added successfully");
+      } else {
+        setMessage("Something went wrong");
+      }
     }
   };
 
@@ -144,6 +150,10 @@ const Video = () => {
                     </p>
                   </div>
                 ))
+              ) : !isAuthenticated ? (
+                <p className="notes-content__item__content">
+                  You are not signed in
+                </p>
               ) : (
                 <p>No notes yet</p>
               )}

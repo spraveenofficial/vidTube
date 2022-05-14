@@ -14,6 +14,7 @@ import {
   FETCH_LIKED_VIDEOS,
   FETCH_LIKED_VIDEOS_SUCCESS,
   FETCH_LIKED_VIDEOS_FAILURE,
+  UPDATE_NOTES,
 } from "../Constants/video";
 import axios from "axios";
 import baseUrl from "../Utils/baseurl";
@@ -127,9 +128,8 @@ export const fetchLikedVideos = async (dispatch) => {
   }
 };
 
-export const createNotes = async (payload) => {
+export const createNotes = async (dispatch, payload) => {
   try {
-    // dispatch({ type: FETCH_VIDEO_LIKE });
     const { data } = await axios({
       url: `${baseUrl}/video/notes`,
       method: "POST",
@@ -140,14 +140,12 @@ export const createNotes = async (payload) => {
         token: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    console.log(data);
-    // dispatch({
-    //   type: FETCH_VIDEO_LIKE_SUCCESS,
-    //   isLiked: data.data.liked,
-    //   isDisliked: data.data.disliked,
-    // });
-    // return data.data.liked ? true : data.data.disliked ? true : false;
+    dispatch({
+      type: UPDATE_NOTES,
+      notes: data.data.notes,
+    });
+    return true;
   } catch (error) {
-    // dispatch({ type: FETCH_VIDEO_LIKE_FAILURE, payload: error });
+    return false;
   }
 };

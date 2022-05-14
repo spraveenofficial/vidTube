@@ -105,12 +105,8 @@ export const useVideoLike = (videoId) => {
       notes,
       createdAt: new Date(),
     };
-    const status = await createNotes(payload);
-    // if (status) {
-    //   dispatch({ type: "UPDATE_NOTES", isNotes: true });
-    // } else {
-    //   dispatch({ type: "UPDATE_NOTES", isNotes: false });
-    // }
+    const status = await createNotes(dispatch, payload);
+    return status;
   };
   return {
     states,

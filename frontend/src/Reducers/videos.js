@@ -19,6 +19,7 @@ import {
   FETCH_LIKED_VIDEOS_SUCCESS,
   FETCH_LIKED_VIDEOS_FAILURE,
   UPDATE_SUBSCRIPTION,
+  UPDATE_NOTES,
 } from "../Constants/video";
 
 export const getHomeVideos = (state, action) => {
@@ -142,6 +143,11 @@ export const getVideoLike = (state, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+    case UPDATE_NOTES:
+      return {
+        ...state,
+        notes: action.notes,
       };
     default:
       return state;
