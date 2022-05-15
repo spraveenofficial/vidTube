@@ -2,6 +2,7 @@ import {
   FETCH_HISTORY,
   FETCH_HISTORY_SUCCESS,
   FETCH_HISTORY_FAILURE,
+  CLEAR_HISTORY,
 } from "../Constants/history";
 import baseUrl from "../Utils/baseurl";
 import axios from "axios";
@@ -40,7 +41,7 @@ export const updateHistoryAction = async (video) => {
   }
 };
 
-export const deleteHistoryAction = async () => {
+export const deleteHistoryAction = async (dispatch) => {
   try {
     const { data } = await axios({
       method: "DELETE",
@@ -49,7 +50,7 @@ export const deleteHistoryAction = async () => {
         token: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    console.log(data);
+    dispatch({ type: CLEAR_HISTORY });
   } catch (error) {
     console.log(error);
   }

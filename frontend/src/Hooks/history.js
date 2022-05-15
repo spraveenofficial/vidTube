@@ -14,5 +14,5 @@ export const useHistory = () => {
   useEffect(() => {
     fetchHistoryAction(dispatch);
   }, []);
-  return { loading, error, history, success };
+  return { loading, error, history, success, dispatch };
 };

@@ -19,4 +19,8 @@ export {
   deletePlaylist,
 } from "./playlist";
 
-export { fetchHistoryAction, updateHistoryAction } from "./history";
+export {
+  fetchHistoryAction,
+  updateHistoryAction,
+  deleteHistoryAction,
+} from "./history";

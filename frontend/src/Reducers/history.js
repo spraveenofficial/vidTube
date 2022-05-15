@@ -2,6 +2,7 @@ import {
   FETCH_HISTORY,
   FETCH_HISTORY_SUCCESS,
   FETCH_HISTORY_FAILURE,
+  CLEAR_HISTORY,
 } from "../Constants/history";
 
 export const fetchHistory = (state, action) => {
@@ -24,6 +25,14 @@ export const fetchHistory = (state, action) => {
         loading: false,
         success: false,
         error: action.payload,
+      };
+    case CLEAR_HISTORY:
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        error: null,
+        history: [],
       };
     default:
       return state;
