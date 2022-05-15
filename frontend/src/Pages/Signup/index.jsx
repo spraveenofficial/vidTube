@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import "./style.css";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Button from "../../Components/Button";
 import Input from "../../Components/Input";
@@ -6,28 +7,50 @@ import { useSignup } from "../../Hooks/auth";
 import { loadUser, signupUser } from "../../Actions";
 import Toast from "../../Components/Toast";
 import { useAuth } from "../../Contexts/auth-context";
+import { useFormik } from "formik";
 const Signup = () => {
   const { dispatch } = useAuth();
   const { loading, message, success, dispatchSignup } = useSignup();
-  const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    password: "",
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+    },
+    onSubmit: async (values) => {
+      signupUser(
+        {
+          channelName: values.name,
+          email: values.email,
+          password: values.password,
+        },
+        dispatchSignup
+      );
+    },
+    validate: (values) => {
+      const regularExpression = new RegExp(
+        "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+      );
+      let errors = {};
+      if (!values.email) {
+        errors.email = "Valid email is required";
+      } else if (
+        !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(values.email)
+      ) {
+        errors.email = "Invalid email address";
+      }
+      if (!values.name) {
+        errors.name = "Valid name is required";
+      }
+      if (!values.password) {
+        errors.password = "Valid password is required";
+      } else if (!regularExpression.test(values.password)) {
+        errors.password =
+          "Password must contain at least 8 characters, one uppercase, one lowercase, one number and one special character";
+      }
+      return errors;
+    },
   });
-  const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
-  };
-  const handleSubmit = () => {
-    signupUser(
-      {
-        channelName: userData.name,
-        email: userData.email,
-        password: userData.password,
-      },
-      dispatchSignup
-    );
-  };
-  // Running Verify user after successful signup
   useEffect(() => {
     success === true &&
       setTimeout(() => {
@@ -50,35 +73,46 @@ const Signup = () => {
           <h1>Signup</h1>
           <p>You're one step before, for getting our premium service.</p>
         </section>
-        <section>
-          <Input
-            label="Enter Name*"
-            placeholder="John Doe"
-            name="name"
-            onChange={handleChange}
-          />
-          <Input
-            label="Enter Email*"
-            placeholder="johndoe@gmail.com"
-            name="email"
-            onChange={handleChange}
-          />
-          <Input
-            placeholder="Enter your Password"
-            type="password"
-            label="Enter Password*"
-            name="password"
-            onChange={handleChange}
-          />
-          <div className="login-btn">
-            <Button
-              onClick={() => handleSubmit()}
-              loading={loading}
-              name="Create Account"
+
+        <form className="signup-form" onSubmit={formik.handleSubmit}>
+          <section>
+            <Input
+              label="Enter Name*"
+              placeholder="John Doe"
+              name="name"
+              onChange={formik.handleChange}
+              value={formik.values.name}
             />
-            <Link to="/login">Already have account?</Link>
-          </div>
-        </section>
+            {formik.touched.name && formik.errors.name ? (
+              <p>{formik.errors.name}</p>
+            ) : null}
+            <Input
+              label="Enter Email*"
+              placeholder="johndoe@gmail.com"
+              name="email"
+              onChange={formik.handleChange}
+              value={formik.values.email}
+            />
+            {formik.touched.email && formik.errors.email ? (
+              <p>{formik.errors.email}</p>
+            ) : null}
+            <Input
+              placeholder="Enter your Password"
+              type="password"
+              label="Enter Password*"
+              name="password"
+              onChange={formik.handleChange}
+              value={formik.values.password}
+            />
+            {formik.touched.password && formik.errors.password ? (
+              <p>{formik.errors.password}</p>
+            ) : null}
+            <div className="login-btn">
+              <Button loading={loading} name="Create Account" type="submit" />
+              <Link to="/login">Already have account?</Link>
+            </div>
+          </section>
+        </form>
       </div>
       {!loading && message && <Toast message={message} success={success} />}
     </div>
