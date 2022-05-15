@@ -10,7 +10,6 @@ import baseUrl from "../../Utils/baseurl";
 import NotFound from "../../Components/NotFound";
 import Toast from "../../Components/Toast";
 import { useState } from "react";
-import Comment from "../../Components/Comment";
 import { useCreatePlaylist } from "../../Hooks/playlist";
 const Video = () => {
   const [toast, setToast] = useState(false);
@@ -89,12 +88,12 @@ const Video = () => {
               </div>
               <div className="video-titles-buttons">
                 <LikeIcon
-                  isblue={liked ? liked : null}
+                  isblue={liked ? true : false}
                   onClick={() => handleLikes(_id)}
                 />
                 {likes}
                 <DislikeIcon
-                  isblue={disLiked ? disLiked : null}
+                  isblue={disLiked ? true : false}
                   onClick={() => handleDisLikes(_id)}
                 />
                 {dislikes}
@@ -133,7 +132,6 @@ const Video = () => {
                 </p>
               </div>
             </div>
-            <Comment />
           </div>
         </div>
         {showModal()}
@@ -143,7 +141,7 @@ const Video = () => {
             <div className="notes-content">
               {notes.length > 0 ? (
                 notes.map((e) => (
-                  <div className="notes-content__item" key={e._id}>
+                  <div className="notes-content__item" key={e.createdAt}>
                     <p className="notes-content__item__title">{e.note}</p>
                     <p className="notes-content__item__content">
                       {moment(e.createdAt).fromNow()}

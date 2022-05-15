@@ -5,7 +5,6 @@ import "video.js/dist/video-js.css";
 const Player = ({ src: previewUrl }) => {
   const videoRef = useRef(null);
   const videoJsOptions = {
-    // lookup the options in the docs for more options
     autoplay: true,
     controls: true,
     responsive: true,
@@ -18,15 +17,10 @@ const Player = ({ src: previewUrl }) => {
     ],
   };
   useEffect(() => {
-    const vjsPlayer = videojs(videoRef.current);
+    const vjsPlayer = videojs(videoRef.current, videoJsOptions);
     if (previewUrl) {
       vjsPlayer.src({ type: "video/mp4", src: previewUrl });
     }
-
-    // vjsPlayer.on("ended", () => {
-    //   client(`${process.env.REACT_APP_BE}/videos/${videoId}/view`);
-    // });
-
     return () => {
       if (vjsPlayer) {
         vjsPlayer.dispose();
@@ -35,8 +29,6 @@ const Player = ({ src: previewUrl }) => {
   }, []);
 
   return (
-    // Make autoPlay true to play the video when the component is loaded
-
     <div data-vjs-player>
       <video
         controls

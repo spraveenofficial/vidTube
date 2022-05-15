@@ -68,19 +68,23 @@ const useCreatePlaylist = (id) => {
   };
   const showModal = () =>
     modal && (
-      <Modal onClose={() => closeModalClick(0)}>
+      <Modal onClose={() => closeModalClick()}>
         <div className="customized-model-playlist">
           <div className="customized-model-playlist-header">
             {data.length === 0 ? (
               <h1>Create a new playlist</h1>
             ) : (
               data.map((item) => {
+                const checkIfExist = item.videos.find(
+                  (video) => video._id === id
+                );
                 return (
                   <div className="select-playlist-to-save">
                     <input
                       onChange={() => setSelected(item._id)}
                       type="checkbox"
                       checked={isSelected === item._id}
+                      disabled={checkIfExist}
                     />
                     {item.name}
                   </div>
