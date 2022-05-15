@@ -5,6 +5,7 @@ import {
   ADD_PLAYLIST_REQUEST,
   ADD_PLAYLIST_SUCCESS,
   ADD_PLAYLIST_FAILURE,
+  DELETE_PLAYLIST,
 } from "../Constants/playlist";
 import axios from "axios";
 import baseurl from "../Utils/baseurl";
@@ -44,7 +45,6 @@ export const addPlaylistAction = async (dispatch, payload) => {
 };
 
 export const addVideoToExistingPlaylist = async (playlistId, videoId) => {
-  
   try {
     const { data } = await axios({
       method: "PUT",
@@ -53,6 +53,25 @@ export const addVideoToExistingPlaylist = async (playlistId, videoId) => {
         token: `Bearer ${localStorage.getItem("token")}`,
       },
     });
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deletePlaylist = async (playlistId, dispatch) => {
+  try {
+    const { data } = await axios({
+      method: "DELETE",
+      url: `${baseurl}/playlist/delete`,
+      headers: {
+        token: `Bearer ${localStorage.getItem("token")}`,
+      },
+      data: {
+        playlistId,
+      },
+    });
+    dispatch({ type: DELETE_PLAYLIST, payload: playlistId });
     return data;
   } catch (err) {
     console.log(err);

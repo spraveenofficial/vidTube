@@ -72,7 +72,7 @@ const useCreatePlaylist = (id) => {
         <div className="customized-model-playlist">
           <div className="customized-model-playlist-header">
             {data.length === 0 ? (
-              <h1>Create a new playlist</h1>
+              <p>no existing playlist found.</p>
             ) : (
               data.map((item) => {
                 const checkIfExist = item.videos.find(

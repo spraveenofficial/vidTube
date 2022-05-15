@@ -3,8 +3,12 @@ import { usePlaylist } from "../../Hooks/playlist";
 import Loader from "../../Components/Loader";
 import VideoCard from "../../Components/VideoCard";
 import { DeleteIcon } from "../../Components/Icons";
+import { deletePlaylist } from "../../Actions";
 const Playlist = () => {
-  const { loading, playlist, success } = usePlaylist();
+  const { loading, playlist, success, dispatch } = usePlaylist();
+  const handleDelete = async (id) => {
+    deletePlaylist(id, dispatch);
+  };
   if (loading) {
     return (
       <div className="homepage-items">
@@ -12,7 +16,7 @@ const Playlist = () => {
       </div>
     );
   }
-  if (playlist.count === 0 || !success) {
+  if (playlist?.data?.length === 0 || !success) {
     return (
       <div className="homepage-items">
         <h2 className="mt-10 ml-20">No Playlist Found</h2>
@@ -34,7 +38,9 @@ const Playlist = () => {
                 <h2>
                   {index + 1}. {playlist.name}
                 </h2>
-                <DeleteIcon />
+                <div className="pointer">
+                  <DeleteIcon onClick={() => handleDelete(playlist._id)} />
+                </div>
               </div>
               <div className="playlist-item-content">
                 <div className="playlist-item-content-item">

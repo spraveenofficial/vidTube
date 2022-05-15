@@ -6,6 +6,7 @@ import {
   ADD_PLAYLIST_SUCCESS,
   ADD_PLAYLIST_FAILURE,
   ADD_NEW_PLAYLIST,
+  DELETE_PLAYLIST,
 } from "../Constants/playlist";
 
 export const fetchPlaylist = (state, action) => {
@@ -22,7 +23,7 @@ export const fetchPlaylist = (state, action) => {
         playlist: action.payload,
         success: true,
       };
-    case "ADD_NEW_PLAYLIST":
+    case ADD_NEW_PLAYLIST:
       return {
         ...state,
         playlist: {
@@ -36,6 +37,16 @@ export const fetchPlaylist = (state, action) => {
         loading: false,
         error: action.payload,
         success: false,
+      };
+    case DELETE_PLAYLIST:
+      return {
+        ...state,
+        playlist: {
+          ...state.playlist,
+          data: state.playlist.data.filter(
+            (playlist) => playlist._id !== action.payload
+          ),
+        },
       };
     default:
       return state;

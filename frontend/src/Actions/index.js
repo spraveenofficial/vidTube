@@ -16,5 +16,7 @@ export {
   fetchPlaylistAction,
   addPlaylistAction,
   addVideoToExistingPlaylist,
+  deletePlaylist,
 } from "./playlist";
+
 export { fetchHistoryAction, updateHistoryAction } from "./history";
