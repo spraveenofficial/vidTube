@@ -17,7 +17,7 @@ const Channel = () => {
             </div>
             <div className="channel-info-card">
               <div className="channel-info-card__header">
-                <h1>Channel</h1>
+                <h1>Channel Name</h1>
               </div>
             </div>
           </div>
