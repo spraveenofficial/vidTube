@@ -132,17 +132,19 @@ export const getVideoLike = (state, action) => {
         liked: action.isLiked,
         disLiked: action.isDisliked,
         isSubscribed: state.isSubscribed === true ? true : action.isSubscribed,
-        notes: action.notes,
+        notes: action.notes ? action.notes : state.notes,
       };
     case UPDATE_SUBSCRIPTION:
       return {
         ...state,
         isSubscribed: action.isSubscribed,
+        notes: state.notes,
       };
     case FETCH_VIDEO_LIKE_FAILURE:
       return {
         ...state,
         error: action.payload,
+        notes: state.notes,
       };
     case UPDATE_NOTES:
       return {

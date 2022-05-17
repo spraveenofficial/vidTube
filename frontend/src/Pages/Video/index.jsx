@@ -139,7 +139,7 @@ const Video = () => {
           <h2>Your Notes</h2>
           <div className="notes-box">
             <div className="notes-content">
-              {notes.length > 0 ? (
+              {notes?.length > 0 ? (
                 notes.map((e) => (
                   <div className="notes-content__item" key={e.createdAt}>
                     <p className="notes-content__item__title">{e.note}</p>
