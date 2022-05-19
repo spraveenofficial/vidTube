@@ -19,6 +19,11 @@ const Sidebar = () => {
             <span>Playlist</span>
           </div>
         </NavLink>
+        <NavLink activeclassname="active" to="/watchlater">
+          <div className="menu-item">
+            <span>Watch Later</span>
+          </div>
+        </NavLink>
         <NavLink activeclassname="active" to="/liked-videos">
           <div className="menu-item">
             <span>Liked Videos</span>

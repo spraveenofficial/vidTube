@@ -15,6 +15,7 @@ import {
   updateHistoryAction,
   uploadVideo,
   createNotes,
+  addToWatchLaterAction,
 } from "../Actions";
 import { useAuth } from "../Contexts/auth-context";
 import { useReducer, useEffect } from "react";
@@ -71,12 +72,27 @@ export const useVideoLike = (videoId) => {
     liked: false,
     disLiked: false,
     isSubscribed: false,
+    isWatchLatered: false,
     notes: [],
   };
   const [states, dispatch] = useReducer(getVideoLike, initialState);
   useEffect(() => {
     isAuthenticated && fetchVideoLike(dispatch, videoId);
   }, []);
+  const handleWatchLater = async () => {
+    const status = await addToWatchLaterAction(videoId);
+    if (status) {
+      dispatch({
+        type: "UPDATE_WATCH_LATER",
+        payload: true,
+      });
+    } else {
+      dispatch({
+        type: "UPDATE_WATCH_LATER",
+        payload: false,
+      });
+    }
+  };
   const handleLike = async (setDispatch) => {
     const status = await likeVideo(dispatch, videoId, "like");
     status === true
@@ -116,6 +132,7 @@ export const useVideoLike = (videoId) => {
     handleSubscribes,
     userData: user,
     handleCreateNotes,
+    handleWatchLater,
   };
 };
 

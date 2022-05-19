@@ -24,3 +24,5 @@ export {
   updateHistoryAction,
   deleteHistoryAction,
 } from "./history";
+
+export { addToWatchLaterAction } from "./watch-later";

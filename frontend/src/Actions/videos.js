@@ -80,6 +80,7 @@ export const fetchVideoLike = async (dispatch, videoId) => {
       isDisliked: data.data.disliked,
       isSubscribed: data.data.isSubscribed,
       notes: data.data.notes,
+      isWatchLatered: data.data.isWatchLatered,
     });
   } catch (error) {
     console.log(error);

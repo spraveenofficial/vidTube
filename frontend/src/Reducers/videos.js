@@ -20,6 +20,7 @@ import {
   FETCH_LIKED_VIDEOS_FAILURE,
   UPDATE_SUBSCRIPTION,
   UPDATE_NOTES,
+  UPDATE_WATCH_LATER,
 } from "../Constants/video";
 
 export const getHomeVideos = (state, action) => {
@@ -133,6 +134,9 @@ export const getVideoLike = (state, action) => {
         disLiked: action.isDisliked,
         isSubscribed: state.isSubscribed === true ? true : action.isSubscribed,
         notes: action.notes ? action.notes : state.notes,
+        isWatchLatered: action.isWatchLatered
+          ? action.isWatchLatered
+          : state.isWatchLatered,
       };
     case UPDATE_SUBSCRIPTION:
       return {
@@ -150,6 +154,11 @@ export const getVideoLike = (state, action) => {
       return {
         ...state,
         notes: action.notes,
+      };
+    case UPDATE_WATCH_LATER:
+      return {
+        ...state,
+        isWatchLatered: action.payload,
       };
     default:
       return state;

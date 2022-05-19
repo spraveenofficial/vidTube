@@ -1,5 +1,10 @@
 import "./style.css";
-import { LikeIcon, DislikeIcon, PlaylistIcon } from "../../Components/Icons";
+import {
+  LikeIcon,
+  DislikeIcon,
+  PlaylistIcon,
+  WatchIcon,
+} from "../../Components/Icons";
 import Button from "../../Components/Button";
 import Player from "../../Components/Player";
 import { useEachVideo, useVideoLike } from "../../Hooks/videos";
@@ -25,8 +30,9 @@ const Video = () => {
     handleSubscribes,
     handleCreateNotes,
     userData,
+    handleWatchLater,
   } = useVideoLike(id);
-  const { liked, disLiked, isSubscribed, notes } = states;
+  const { liked, disLiked, isSubscribed, notes, isWatchLatered } = states;
   const { state, dispatch } = useEachVideo(id);
   const { loading, video, success, error } = state;
   if (loading)
@@ -72,6 +78,14 @@ const Video = () => {
     }
   };
 
+  const handleAddtoWatchLater = () => {
+    if (!isAuthenticated) {
+      setToast((prev) => !prev);
+    } else {
+      handleWatchLater();
+    }
+  };
+
   return (
     !loading &&
     success && (
@@ -103,6 +117,10 @@ const Video = () => {
                       ? setToast((prev) => !prev)
                       : openModalClick()
                   }
+                />
+                <WatchIcon
+                  isblue={isWatchLatered ? true : false}
+                  onClick={handleAddtoWatchLater}
                 />
               </div>
             </div>

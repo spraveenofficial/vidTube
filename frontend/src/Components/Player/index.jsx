@@ -5,7 +5,7 @@ import "video.js/dist/video-js.css";
 const Player = ({ src: previewUrl }) => {
   const videoRef = useRef(null);
   const videoJsOptions = {
-    autoplay: true,
+    autoplay: false,
     controls: true,
     responsive: true,
     fluid: true,
