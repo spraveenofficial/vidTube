@@ -4,6 +4,7 @@ import {
   uploadVideoReducer,
   getVideoLike,
   getLikedVideos,
+  getWatchLater,
 } from "../Reducers";
 import {
   fetchLikedVideos,
@@ -16,6 +17,7 @@ import {
   uploadVideo,
   createNotes,
   addToWatchLaterAction,
+  fetchWatchLater,
 } from "../Actions";
 import { useAuth } from "../Contexts/auth-context";
 import { useReducer, useEffect } from "react";
@@ -147,5 +149,20 @@ export const useLikedVideos = () => {
   useEffect(() => {
     fetchLikedVideos(dispatch);
   }, []);
+  return { state };
+};
+
+export const usePlaylist = () => {
+  const initialState = {
+    loading: true,
+    success: false,
+    message: "",
+    videos: [],
+  };
+  const [state, dispatch] = useReducer(getWatchLater, initialState);
+  useEffect(() => {
+    fetchWatchLater(dispatch);
+  }, []);
+
   return { state };
 };

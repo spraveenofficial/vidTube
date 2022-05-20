@@ -21,6 +21,9 @@ import {
   UPDATE_SUBSCRIPTION,
   UPDATE_NOTES,
   UPDATE_WATCH_LATER,
+  FETCH_WATCHLATER_REQUEST,
+  FETCH_WATCHLATER_REQUEST_SUCCESS,
+  FETCH_WATCHLATER_REQUEST_FAILURE,
 } from "../Constants/video";
 
 export const getHomeVideos = (state, action) => {
@@ -180,6 +183,32 @@ export const getLikedVideos = (state, action) => {
         success: true,
       };
     case FETCH_LIKED_VIDEOS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+        success: false,
+      };
+    default:
+      return state;
+  }
+};
+
+export const getWatchLater = (state, action) => {
+  switch (action.type) {
+    case FETCH_WATCHLATER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
+    case FETCH_WATCHLATER_REQUEST_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        videos: action.payload,
+        success: true,
+      };
+    case FETCH_WATCHLATER_REQUEST_FAILURE:
       return {
         ...state,
         loading: false,

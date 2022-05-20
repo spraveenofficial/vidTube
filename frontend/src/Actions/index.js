@@ -25,4 +25,4 @@ export {
   deleteHistoryAction,
 } from "./history";
 
-export { addToWatchLaterAction } from "./watch-later";
+export { addToWatchLaterAction, fetchWatchLater } from "./watch-later";
