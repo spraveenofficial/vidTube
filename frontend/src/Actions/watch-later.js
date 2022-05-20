@@ -4,6 +4,7 @@ import {
   FETCH_WATCHLATER_REQUEST,
   FETCH_WATCHLATER_REQUEST_SUCCESS,
   FETCH_WATCHLATER_REQUEST_FAILURE,
+  DELETE_FROM_WATCH_LATER,
 } from "../Constants/video";
 const addToWatchLaterAction = async (videoId) => {
   try {
@@ -51,4 +52,25 @@ const fetchWatchLater = async (dispatch) => {
   }
 };
 
-export { addToWatchLaterAction, fetchWatchLater };
+const deleteFromWatchLater = async (videoId) => {
+  try {
+    const { data } = await axios({
+      method: "DELETE",
+      url: `${baseUrl}/watchlater/delete`,
+      headers: {
+        token: `Bearer ${localStorage.getItem("token")}`,
+      },
+      data: {
+        videoId,
+      },
+    });
+    if (data.success) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+export { addToWatchLaterAction, fetchWatchLater, deleteFromWatchLater };

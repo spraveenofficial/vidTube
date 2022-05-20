@@ -25,4 +25,8 @@ export {
   deleteHistoryAction,
 } from "./history";
 
-export { addToWatchLaterAction, fetchWatchLater } from "./watch-later";
+export {
+  addToWatchLaterAction,
+  fetchWatchLater,
+  deleteFromWatchLater,
+} from "./watch-later";

@@ -24,6 +24,7 @@ import {
   FETCH_WATCHLATER_REQUEST,
   FETCH_WATCHLATER_REQUEST_SUCCESS,
   FETCH_WATCHLATER_REQUEST_FAILURE,
+  DELETE_FROM_WATCH_LATER,
 } from "../Constants/video";
 
 export const getHomeVideos = (state, action) => {
@@ -214,6 +215,11 @@ export const getWatchLater = (state, action) => {
         loading: false,
         error: action.payload,
         success: false,
+      };
+    case DELETE_FROM_WATCH_LATER:
+      return {
+        ...state,
+        videos: state.videos.filter((video) => video._id !== action.payload),
       };
     default:
       return state;

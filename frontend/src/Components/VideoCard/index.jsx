@@ -19,22 +19,31 @@ const VideoCard = (props) => {
   };
 
   const handleNavigate = (e) => {
+    // Check if user clickes on options of options
+    if (e.target.className === "options") {
+      return;
+    } else {
+      navigate(`/video/${id ? id : data._id}`);
+    }
     e.preventDefault();
     // Check if user clicked on the video card or the options button
-    if (
-      e.target.tagName === "path" ||
-      e.target.tagName === "svg" ||
-      e.target.tagName === "BUTTON"
-    ) {
-      return setOpen(!open);
-    }
-    navigate(`/video/${data._id}`);
+    // if (
+    //   e.target.tagName === "path" ||
+    //   e.target.tagName === "svg" ||
+    //   e.target.tagName === "BUTTON"
+    // ) {
+    //   return setOpen(!open);
+    // }
   };
 
   const RenderOptions = () => {
     return (
       <div className="video_option">
-        {access === "later" && <p>Delete From Watch Later</p>}
+        {access === "later" && (
+          <p onClick={() => props?.deleteFromWatchLater(id ? id : data._id)}>
+            Delete From Watch Later
+          </p>
+        )}
         {access === "like" && <p>Delete From Liked Videos</p>}
       </div>
     );
@@ -70,16 +79,16 @@ const VideoCard = (props) => {
       <section className="content-container relative">
         <h3>{title}</h3>
         {access && (
-          <div className="parent_video_option">
+          <div className="parent_video_option options">
             <button
               type="button"
-              className="relative"
+              className="relative options"
               aria-expanded="true"
               aria-haspopup="true"
               onClick={handleOpenOptions}
             >
               <svg
-                className="options-w-h"
+                className="options-w-h options"
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 20 20"
                 fill="black"

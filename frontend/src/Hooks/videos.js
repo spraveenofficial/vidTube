@@ -164,5 +164,12 @@ export const useWatchLater = () => {
     fetchWatchLater(dispatch);
   }, []);
 
-  return { state };
+  const deleteFromWatchLater = async (videoId) => {
+    const status = await addToWatchLaterAction(videoId);
+    if (status) {
+      dispatch({ type: "DELETE_FROM_WATCH_LATER", payload: videoId });
+    }
+  };
+
+  return { state, deleteFromWatchLater };
 };

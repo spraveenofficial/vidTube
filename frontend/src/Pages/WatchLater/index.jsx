@@ -3,7 +3,7 @@ import VideoCard from "../../Components/VideoCard";
 import { useWatchLater } from "../../Hooks/videos";
 
 const WatchLater = () => {
-  const { state } = useWatchLater();
+  const { state, deleteFromWatchLater } = useWatchLater();
   const { loading, success, videos } = state;
   if (loading) {
     return (
@@ -27,7 +27,12 @@ const WatchLater = () => {
         </h2>
         <div className="wrapper">
           {videos.map((video, index) => (
-            <VideoCard key={index} access={"later"} data={video} />
+            <VideoCard
+              key={index}
+              access={"later"}
+              data={video}
+              deleteFromWatchLater={deleteFromWatchLater}
+            />
           ))}
         </div>
       </div>
