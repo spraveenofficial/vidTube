@@ -152,7 +152,7 @@ export const useLikedVideos = () => {
   return { state };
 };
 
-export const usePlaylist = () => {
+export const useWatchLater = () => {
   const initialState = {
     loading: true,
     success: false,
