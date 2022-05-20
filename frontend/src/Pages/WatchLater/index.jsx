@@ -27,7 +27,7 @@ const WatchLater = () => {
         </h2>
         <div className="wrapper">
           {videos.map((video, index) => (
-            <VideoCard key={index} data={video} />
+            <VideoCard key={index} access={"later"} data={video} />
           ))}
         </div>
       </div>

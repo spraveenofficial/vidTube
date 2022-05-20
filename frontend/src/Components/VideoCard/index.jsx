@@ -1,8 +1,11 @@
 import "./style.css";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
-const VideoCard = ({ data }) => {
+import { useState } from "react";
+const VideoCard = (props) => {
+  const { data, access } = props;
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
   const { id, title, thumbnailUrl, views, userId, duration, createdAt } = data;
   const durationMinutes = Math.floor(duration / 60);
   const durationSeconds = duration - durationMinutes * 60;
@@ -10,8 +13,34 @@ const VideoCard = ({ data }) => {
     durationMinutes > 0
       ? `${durationMinutes}.${durationSeconds.toFixed()} min`
       : `${durationSeconds} sec`;
+
+  const handleOpenOptions = () => {
+    setOpen(!open);
+  };
+
+  const handleNavigate = (e) => {
+    e.preventDefault();
+    // Check if user clicked on the video card or the options button
+    if (
+      e.target.tagName === "path" ||
+      e.target.tagName === "svg" ||
+      e.target.tagName === "BUTTON"
+    ) {
+      return setOpen(!open);
+    }
+    navigate(`/video/${data._id}`);
+  };
+
+  const RenderOptions = () => {
+    return (
+      <div className="video_option">
+        {access === "later" && <p>Delete From Watch Later</p>}
+        {access === "like" && <p>Delete From Liked Videos</p>}
+      </div>
+    );
+  };
   return (
-    <div onClick={() => navigate(`/video/${id}`)} className="clip">
+    <div onClick={handleNavigate} className="clip">
       <section className="preview-container">
         <img src={thumbnailUrl} alt="video" />
         <span className="time-status">{durationFormatted}</span>
@@ -38,8 +67,30 @@ const VideoCard = ({ data }) => {
           </button>
         </div>
       </section>
-      <section className="content-container">
+      <section className="content-container relative">
         <h3>{title}</h3>
+        {access && (
+          <div className="parent_video_option">
+            <button
+              type="button"
+              className="relative"
+              aria-expanded="true"
+              aria-haspopup="true"
+              onClick={handleOpenOptions}
+            >
+              <svg
+                className="options-w-h"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+                fill="black"
+                aria-hidden="true"
+              >
+                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+              </svg>
+            </button>
+          </div>
+        )}
+        {open && <RenderOptions />}
         <footer>
           <p className="channel-name">{userId.channelName}</p>
           <div className="meta">

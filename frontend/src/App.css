@@ -156,6 +156,10 @@ body.modal-window {
 .w-max {
   width: max-content;
 }
+
+.relative {
+  position: relative;
+}
 .active div {
   border-top-left-radius: 40px;
   background: #adc1e9;

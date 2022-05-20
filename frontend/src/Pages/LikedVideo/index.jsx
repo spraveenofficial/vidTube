@@ -28,7 +28,7 @@ const LikedVideo = () => {
         <h2 className="mt-10 ml-10">Total Liked Videos: {videos.count}</h2>
         <div className="wrapper">
           {videos.data.map((video, index) => (
-            <VideoCard key={index} data={video} />
+            <VideoCard key={index} data={video} access={"like"} />
           ))}
         </div>
       </div>
