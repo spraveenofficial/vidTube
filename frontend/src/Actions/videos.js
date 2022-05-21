@@ -154,17 +154,17 @@ export const createNotes = async (dispatch, payload) => {
 
 export const deleteVideoFromLikedVideo = async (dispatch, videoId) => {
   try {
-    // const { data } = await axios({
-    //   url: `${baseUrl}/feelings/delete`,
-    //   method: "POST",
-    //   data: {
-    //     videoId,
-    //   },
-    //   headers: {
-    //     token: `Bearer ${localStorage.getItem("token")}`,
-    //   },
-    // });
-    // if (!data.success) return;
+    const { data } = await axios({
+      url: `${baseUrl}/feelings/delete`,
+      method: "POST",
+      data: {
+        videoId,
+      },
+      headers: {
+        token: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    if (!data.success) return;
     dispatch({
       type: REMOVE_LIKED_VIDEO,
       payload: videoId,
