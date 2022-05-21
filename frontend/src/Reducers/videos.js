@@ -25,6 +25,7 @@ import {
   FETCH_WATCHLATER_REQUEST_SUCCESS,
   FETCH_WATCHLATER_REQUEST_FAILURE,
   DELETE_FROM_WATCH_LATER,
+  REMOVE_LIKED_VIDEO,
 } from "../Constants/video";
 
 export const getHomeVideos = (state, action) => {
@@ -189,6 +190,11 @@ export const getLikedVideos = (state, action) => {
         loading: false,
         error: action.payload,
         success: false,
+      };
+    case REMOVE_LIKED_VIDEO:
+      return {
+        ...state,
+        videos: state.videos.filter((video) => video._id !== action.payload),
       };
     default:
       return state;

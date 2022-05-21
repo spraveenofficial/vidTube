@@ -18,22 +18,8 @@ const VideoCard = (props) => {
     setOpen(!open);
   };
 
-  const handleNavigate = (e) => {
-    // Check if user clickes on options of options
-    if (e.target.className === "options") {
-      return;
-    } else {
-      navigate(`/video/${id ? id : data._id}`);
-    }
-    e.preventDefault();
-    // Check if user clicked on the video card or the options button
-    // if (
-    //   e.target.tagName === "path" ||
-    //   e.target.tagName === "svg" ||
-    //   e.target.tagName === "BUTTON"
-    // ) {
-    //   return setOpen(!open);
-    // }
+  const handleNavigate = () => {
+    navigate(`/video/${id ? id : data._id}`);
   };
 
   const RenderOptions = () => {
@@ -44,13 +30,17 @@ const VideoCard = (props) => {
             Delete From Watch Later
           </p>
         )}
-        {access === "like" && <p>Delete From Liked Videos</p>}
+        {access === "like" && (
+          <p onClick={() => props?.handleDeleteVideo(id ? id : data._id)}>
+            Delete From Liked Videos
+          </p>
+        )}
       </div>
     );
   };
   return (
-    <div onClick={handleNavigate} className="clip">
-      <section className="preview-container">
+    <div className="clip">
+      <section onClick={handleNavigate} className="preview-container">
         <img src={thumbnailUrl} alt="video" />
         <span className="time-status">{durationFormatted}</span>
         <div className="overlay-preview">
@@ -77,7 +67,7 @@ const VideoCard = (props) => {
         </div>
       </section>
       <section className="content-container relative">
-        <h3>{title}</h3>
+        <h3 onClick={handleNavigate}>{title}</h3>
         {access && (
           <div className="parent_video_option options">
             <button
@@ -100,7 +90,7 @@ const VideoCard = (props) => {
           </div>
         )}
         {open && <RenderOptions />}
-        <footer>
+        <footer onClick={handleNavigate}>
           <p className="channel-name">{userId.channelName}</p>
           <div className="meta">
             <p>{views} views</p>

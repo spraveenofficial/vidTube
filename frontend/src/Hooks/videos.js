@@ -18,6 +18,8 @@ import {
   createNotes,
   addToWatchLaterAction,
   fetchWatchLater,
+  deleteFromWatchLaterAction,
+  deleteVideoFromLikedVideo,
 } from "../Actions";
 import { useAuth } from "../Contexts/auth-context";
 import { useReducer, useEffect } from "react";
@@ -146,10 +148,13 @@ export const useLikedVideos = () => {
     success: false,
   };
   const [state, dispatch] = useReducer(getLikedVideos, initialState);
+  const handleDeleteVideo = (videoId) =>
+    deleteVideoFromLikedVideo(dispatch, videoId);
   useEffect(() => {
     fetchLikedVideos(dispatch);
   }, []);
-  return { state };
+  console.log(state);
+  return { state, handleDeleteVideo };
 };
 
 export const useWatchLater = () => {
@@ -165,7 +170,7 @@ export const useWatchLater = () => {
   }, []);
 
   const deleteFromWatchLater = async (videoId) => {
-    const status = await addToWatchLaterAction(videoId);
+    const status = await deleteFromWatchLaterAction(videoId);
     if (status) {
       dispatch({ type: "DELETE_FROM_WATCH_LATER", payload: videoId });
     }

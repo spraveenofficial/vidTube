@@ -15,6 +15,7 @@ import {
   FETCH_LIKED_VIDEOS_SUCCESS,
   FETCH_LIKED_VIDEOS_FAILURE,
   UPDATE_NOTES,
+  REMOVE_LIKED_VIDEO,
 } from "../Constants/video";
 import axios from "axios";
 import baseUrl from "../Utils/baseurl";
@@ -123,7 +124,7 @@ export const fetchLikedVideos = async (dispatch) => {
         token: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    dispatch({ type: FETCH_LIKED_VIDEOS_SUCCESS, payload: data });
+    dispatch({ type: FETCH_LIKED_VIDEOS_SUCCESS, payload: data.data });
   } catch (error) {
     dispatch({ type: FETCH_LIKED_VIDEOS_FAILURE, payload: error });
   }
@@ -148,5 +149,27 @@ export const createNotes = async (dispatch, payload) => {
     return true;
   } catch (error) {
     return false;
+  }
+};
+
+export const deleteVideoFromLikedVideo = async (dispatch, videoId) => {
+  try {
+    // const { data } = await axios({
+    //   url: `${baseUrl}/feelings/delete`,
+    //   method: "POST",
+    //   data: {
+    //     videoId,
+    //   },
+    //   headers: {
+    //     token: `Bearer ${localStorage.getItem("token")}`,
+    //   },
+    // });
+    // if (!data.success) return;
+    dispatch({
+      type: REMOVE_LIKED_VIDEO,
+      payload: videoId,
+    });
+  } catch (error) {
+    return;
   }
 };

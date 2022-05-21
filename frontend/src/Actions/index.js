@@ -8,6 +8,7 @@ export {
   fetchVideoLike,
   fetchLikedVideos,
   createNotes,
+  deleteVideoFromLikedVideo,
 } from "./videos";
 
 export { loadSubscriptions, subscribeChannel } from "./subscriptions";
@@ -28,5 +29,5 @@ export {
 export {
   addToWatchLaterAction,
   fetchWatchLater,
-  deleteFromWatchLater,
+  deleteFromWatchLaterAction,
 } from "./watch-later";

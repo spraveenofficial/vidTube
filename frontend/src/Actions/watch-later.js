@@ -52,7 +52,7 @@ const fetchWatchLater = async (dispatch) => {
   }
 };
 
-const deleteFromWatchLater = async (videoId) => {
+const deleteFromWatchLaterAction = async (videoId) => {
   try {
     const { data } = await axios({
       method: "DELETE",
@@ -69,8 +69,7 @@ const deleteFromWatchLater = async (videoId) => {
     }
     return false;
   } catch (error) {
-    console.log(error);
     return false;
   }
 };
-export { addToWatchLaterAction, fetchWatchLater, deleteFromWatchLater };
+export { addToWatchLaterAction, fetchWatchLater, deleteFromWatchLaterAction };
