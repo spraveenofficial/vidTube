@@ -18,8 +18,10 @@ export const fetchHistoryAction = async (dispatch) => {
         token: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-    console.log(data);
-    dispatch({ type: FETCH_HISTORY_SUCCESS, payload: data.data?.[0]?.videos });
+    dispatch({
+      type: FETCH_HISTORY_SUCCESS,
+      payload: data.data ? data.data?.[0]?.videos : [],
+    });
   } catch (error) {
     dispatch({ type: FETCH_HISTORY_FAILURE, payload: error.message });
   }
