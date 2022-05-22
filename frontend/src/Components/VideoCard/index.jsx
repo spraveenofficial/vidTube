@@ -3,7 +3,7 @@ import moment from "moment";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 const VideoCard = (props) => {
-  const { data, access } = props;
+  const { data, access, superAccess } = props;
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const { id, title, thumbnailUrl, views, userId, duration, createdAt } = data;
@@ -48,7 +48,9 @@ const VideoCard = (props) => {
   };
 
   const RenderTime = () => {
-    return <>{access === "home" && <p>{moment(createdAt).fromNow()}</p>}</>;
+    return (
+      <>{superAccess === "home" && <p>{moment(createdAt).fromNow()}</p>}</>
+    );
   };
   return (
     <div className="clip">
