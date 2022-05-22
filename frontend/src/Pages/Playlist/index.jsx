@@ -3,11 +3,15 @@ import { usePlaylist } from "../../Hooks/playlist";
 import Loader from "../../Components/Loader";
 import VideoCard from "../../Components/VideoCard";
 import { DeleteIcon } from "../../Components/Icons";
-import { deletePlaylist } from "../../Actions";
+import { deletePlaylist, deleteVideoFromPlaylist } from "../../Actions";
 const Playlist = () => {
   const { loading, playlist, success, dispatch } = usePlaylist();
   const handleDelete = async (id) => {
     deletePlaylist(id, dispatch);
+  };
+
+  const handleDeleteVideo = async (pID, vID) => {
+    deleteVideoFromPlaylist(pID, vID, dispatch);
   };
   if (loading) {
     return (
@@ -44,7 +48,14 @@ const Playlist = () => {
               </div>
               <div className="wrapper">
                 {playlist.videos.map((video, index) => (
-                  <VideoCard key={index} data={video} access={"playlist"} />
+                  <VideoCard
+                    key={index}
+                    data={video}
+                    access={"playlist"}
+                    handleDeleteVideo={() =>
+                      handleDeleteVideo(playlist._id, video._id)
+                    }
+                  />
                 ))}
               </div>
             </div>

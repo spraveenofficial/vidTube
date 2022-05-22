@@ -6,6 +6,7 @@ import {
   ADD_PLAYLIST_SUCCESS,
   ADD_PLAYLIST_FAILURE,
   DELETE_PLAYLIST,
+  REMOVE_VIDEO_FROM_PLAYLIST,
 } from "../Constants/playlist";
 import axios from "axios";
 import baseurl from "../Utils/baseurl";
@@ -72,6 +73,29 @@ export const deletePlaylist = async (playlistId, dispatch) => {
       },
     });
     dispatch({ type: DELETE_PLAYLIST, payload: playlistId });
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteVideoFromPlaylist = async (
+  playlistId,
+  videoId,
+  dispatch
+) => {
+  try {
+    const { data } = await axios({
+      method: "DELETE",
+      url: `${baseurl}/playlist/delete/${playlistId}/${videoId}`,
+      headers: {
+        token: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    dispatch({
+      type: REMOVE_VIDEO_FROM_PLAYLIST,
+      payload: { playlistId, videoId },
+    });
     return data;
   } catch (err) {
     console.log(err);

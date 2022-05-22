@@ -18,6 +18,7 @@ export {
   addPlaylistAction,
   addVideoToExistingPlaylist,
   deletePlaylist,
+  deleteVideoFromPlaylist,
 } from "./playlist";
 
 export {

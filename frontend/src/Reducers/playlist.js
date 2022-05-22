@@ -7,6 +7,7 @@ import {
   ADD_PLAYLIST_FAILURE,
   ADD_NEW_PLAYLIST,
   DELETE_PLAYLIST,
+  REMOVE_VIDEO_FROM_PLAYLIST,
 } from "../Constants/playlist";
 
 export const fetchPlaylist = (state, action) => {
@@ -46,6 +47,24 @@ export const fetchPlaylist = (state, action) => {
           data: state.playlist.data.filter(
             (playlist) => playlist._id !== action.payload
           ),
+        },
+      };
+    case REMOVE_VIDEO_FROM_PLAYLIST:
+      return {
+        ...state,
+        playlist: {
+          ...state.playlist,
+          data: state.playlist.data.map((playlist) => {
+            if (playlist._id === action.payload.playlistId) {
+              return {
+                ...playlist,
+                videos: playlist.videos.filter(
+                  (video) => video._id !== action.payload.videoId
+                ),
+              };
+            }
+            return playlist;
+          }),
         },
       };
     default:
