@@ -46,6 +46,10 @@ const VideoCard = (props) => {
       </div>
     );
   };
+
+  const RenderTime = () => {
+    return <>{access === "home" && <p>{moment(createdAt).fromNow()}</p>}</>;
+  };
   return (
     <div className="clip">
       <section onClick={handleNavigate} className="preview-container">
@@ -102,7 +106,7 @@ const VideoCard = (props) => {
           <p className="channel-name">{userId.channelName}</p>
           <div className="meta">
             <p>{views} views</p>
-            <p>{moment(createdAt).fromNow()}</p>
+            <RenderTime />
           </div>
         </footer>
       </section>

@@ -22,7 +22,7 @@ const Home = () => {
         <div className="wrapper">
           {videos.data.length > 0 ? (
             videos.data.map((video, index) => (
-              <VideoCard key={index} data={video} />
+              <VideoCard key={index} data={video} access={"home"} />
             ))
           ) : (
             <div className="w-max">
