@@ -24,6 +24,7 @@ export {
   fetchHistoryAction,
   updateHistoryAction,
   deleteHistoryAction,
+  deleteVideoFromHistory,
 } from "./history";
 
 export {

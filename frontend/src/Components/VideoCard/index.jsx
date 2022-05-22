@@ -36,8 +36,11 @@ const VideoCard = (props) => {
           </p>
         )}
         {access === "history" && (
+          <p onClick={() => props?.handleDeleteVideo()}>Delete From History</p>
+        )}
+        {access === "playlist" && (
           <p onClick={() => props?.handleDeleteVideo(id ? id : data._id)}>
-            Delete From History
+            Remove From Playlist
           </p>
         )}
       </div>

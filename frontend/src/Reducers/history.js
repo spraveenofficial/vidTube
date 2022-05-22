@@ -41,9 +41,7 @@ export const fetchHistory = (state, action) => {
         loading: false,
         success: false,
         error: null,
-        history: state.history.filter(
-          (video) => video.id !== action.payload.id
-        ),
+        history: state.history.filter((video) => video.id !== action.payload),
       };
     default:
       return state;

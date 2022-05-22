@@ -34,7 +34,7 @@ const Playlist = () => {
         <div className="playlist-content">
           {playlist.data.map((playlist, index) => (
             <div key={index} className="playlist-item">
-              <div className="playlist-item-title mb-10">
+              <div className="playlist-item-title">
                 <h2>
                   {index + 1}. {playlist.name}
                 </h2>
@@ -42,20 +42,10 @@ const Playlist = () => {
                   <DeleteIcon onClick={() => handleDelete(playlist._id)} />
                 </div>
               </div>
-              <div className="playlist-item-content">
-                <div className="playlist-item-content-item">
-                  <div className="playlist-item-content-item-title">
-                    {playlist.videos.length === 0 ? (
-                      <div className="no-playlist">
-                        <h3>No videos in this playlist</h3>
-                      </div>
-                    ) : (
-                      playlist.videos.map((video, index) => (
-                        <VideoCard key={index} data={video} />
-                      ))
-                    )}
-                  </div>
-                </div>
+              <div className="wrapper">
+                {playlist.videos.map((video, index) => (
+                  <VideoCard key={index} data={video} access={"playlist"} />
+                ))}
               </div>
             </div>
           ))}
