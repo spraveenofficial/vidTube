@@ -36,11 +36,11 @@ const History = () => {
             Clear History
           </button>
         </div>
-        <div className="playlist-item-content">
-          <div className="playlist-item-content-item">
-            <div className="playlist-item-content-item-title">
+        <div className="homepage-items">
+          <div className="wrapper">
+            <div className="video-list">
               {history.data[0].videos.map((video, index) => (
-                <VideoCard key={index} data={video} />
+                <VideoCard key={index} data={video} access={"history"} />
               ))}
             </div>
           </div>

@@ -35,6 +35,11 @@ const VideoCard = (props) => {
             Delete From Liked Videos
           </p>
         )}
+        {access === "history" && (
+          <p onClick={() => props?.handleDeleteVideo(id ? id : data._id)}>
+            Delete From History
+          </p>
+        )}
       </div>
     );
   };

@@ -3,6 +3,7 @@ import {
   FETCH_HISTORY_SUCCESS,
   FETCH_HISTORY_FAILURE,
   CLEAR_HISTORY,
+  REMOVE_HISTORY_VIDEO,
 } from "../Constants/history";
 
 export const fetchHistory = (state, action) => {
@@ -33,6 +34,16 @@ export const fetchHistory = (state, action) => {
         success: false,
         error: null,
         history: [],
+      };
+    case REMOVE_HISTORY_VIDEO:
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        error: null,
+        history: state.history.filter(
+          (video) => video.id !== action.payload.id
+        ),
       };
     default:
       return state;
