@@ -58,13 +58,6 @@ const VideoCard = (props) => {
         <img src={thumbnailUrl} alt="video" />
         <span className="time-status">{durationFormatted}</span>
         <div className="overlay-preview">
-          <div className="play-icon">
-            <svg viewBox="0 0 24 24" className="style-scope yt-icon">
-              <g className="style-scope yt-icon">
-                <path d="M8 5v14l11-7z" className="style-scope yt-icon"></path>
-              </g>
-            </svg>
-          </div>
           <div className="preview">
             <img src={thumbnailUrl} alt="video" />
           </div>

@@ -6,7 +6,6 @@ import "./style.css";
 
 const History = () => {
   const { loading, history, success, dispatch } = useHistory();
-  console.log(history);
   const clearHistoryHandler = () => {
     deleteHistoryAction(dispatch);
   };
